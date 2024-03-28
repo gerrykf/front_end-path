@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <form class="container">
+      <h1>用户注册</h1>
+      <div class="form-item">
+        <input
+          class="txt"
+          type="text"
+          maxlength="11"
+          placeholder="请输入11位手机号"
+        />
+      </div>
+      <div class="form-item clearfix captcha">
+        <input class="txt left" type="text" placeholder="请填写验证码" />
+        <button class="right" type="button" disabled>发送验证码</button>
+      </div>
+      <div class="form-item">
+        <input class="txt" type="text" placeholder="请输入密码" />
+      </div>
+      <div class="form-item">
+        <input class="txt" type="text" placeholder="请再次输入密码" />
+      </div>
+      <div class="form-item">
+        <select class="txt" multiple>
+          <option>爱好1</option>
+          <option>爱好2</option>
+          <option>爱好3</option>
+          <option>爱好4</option>
+          <option>爱好5</option>
+        </select>
+      </div>
+      <div class="form-item clearfix">
+        <div class="title left">性别</div>
+        <div class="right">
+          <label>
+            <input type="radio" name="sex" />
+            <span>男</span>
+          </label>
+          <label>
+            <input type="radio" name="sex" />
+            <span>女</span>
+          </label>
+        </div>
+      </div>
+      <div class="form-item">
+        <textarea class="txt" placeholder="请输入个人简介"></textarea>
+      </div>
+      <div class="policy">
+        <label>
+          <input type="checkbox" />
+          <span>已认真填写过该表单内容</span>
+        </label>
+      </div>
+      <div class="form-item">
+        <button type="submit" disabled>立即注册</button>
+        <button type="reset">重置表单</button>
+      </div>
+    </form>
+  </body>
+</html>
