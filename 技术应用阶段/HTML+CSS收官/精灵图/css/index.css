@@ -1,0 +1,5 @@
+.item {
+  width: 90px;
+  height: 75px;
+  background: url(../img/sprite.jpg) no-repeat -145px -140px;
+}
