@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page {
+  width: 100%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.login_img {
+  width: 400px;
+  height: 200px;
+  position: absolute;
+
+  /** 定位元素的左上角偏移50%  此时只是元素左上角在居中位置*/
+  top: 50%;
+  left: 50%;
+
+  /** 偏移宽高的一半 */
+  margin-top: -100px;
+  margin-left: -200px;
+  /** 将自身偏移-50%  才能形成居中效果 */
+  /* transform: translateX(-50%) translateY(-50%); */
+}
+
+.cat {
+  width: 165px;
+  height: 250px;
+  background-color: red;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  margin-top: -125px;
+  background: url(../img/cat.webp) no-repeat;
+  padding-top: 145px;
+  padding-left: 65px;
+  text-align: center;
+  z-index: 1;
+
+  .qrcode {
+    width: 100px;
+    height: 100px;
+  }
+}
