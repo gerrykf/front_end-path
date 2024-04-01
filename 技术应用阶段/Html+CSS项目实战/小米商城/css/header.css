@@ -1,0 +1,72 @@
+.header {
+  height: 100px;
+  position: relative;
+}
+
+.header-logo h1 {
+  display: none;
+}
+
+.header-logo {
+  background: url(../img/logo.png) no-repeat;
+  width: 56px;
+  height: 56px;
+  /* background-size: 100% 100%;  适应.header-logo的宽高 */
+  background-size: 100% 100%;
+  margin-top: 20px;
+  margin-right: 172px;
+}
+
+.header-menu > a {
+  height: 100px;
+  line-height: 100px;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 二级菜单 */
+
+.header-submenu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100px;
+  width: 100%;
+  background-color: aliceblue;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 30px 0;
+  z-index: 99;
+}
+
+.header-submenu a {
+  width: 204px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.header-cover img {
+  width: 160px;
+  height: 110px;
+}
+
+.header-cover {
+  border-right: 1px solid #ccc;
+}
+
+.cover-name {
+  margin-top: 10px;
+  color: #333;
+}
+.cover-price {
+  color: red;
+}
+
+.header-submenu a:last-child .header-cover {
+  border-right: none;
+}
+
+.header-menu:hover .header-submenu {
+  display: block;
+}

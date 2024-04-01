@@ -1,0 +1,72 @@
+.topnav {
+  background-color: #333;
+  height: 40px;
+  color: #b0b0b0;
+  font-size: 12px;
+}
+
+.topnav-menu,
+.topnav-r {
+  line-height: 40px;
+}
+
+.topnav-menu a {
+  padding: 0 7px;
+  border-right: 1px solid #424242;
+}
+
+.topnav-menu li:first-child a {
+  padding-left: 0;
+}
+
+.topnav-menu li:last-child a {
+  border-right: none;
+}
+
+.topnav-menu a:hover {
+  color: #fff;
+}
+
+/** 购物车 */
+.topnav-cart {
+  background-color: #4c4c4c;
+  width: 120px;
+  height: 40px;
+  position: relative;
+}
+
+.topnav-cart .topnav-link {
+  width: 100%;
+  height: 100%;
+  display: block;
+  text-align: center;
+  color: #fff;
+}
+
+.topnav-cart .topnav-link .iconfont {
+  margin-right: 3px;
+}
+
+.topnav-cart .topnav-detail {
+  background-color: #fff;
+  width: 320px;
+  height: 100px;
+  position: absolute;
+  right: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+  text-align: center;
+  line-height: 100px;
+  display: none;
+  z-index: 99;
+}
+
+/* 移除.topnav-cart 整个元素时才隐藏 */
+.topnav-cart:hover .topnav-detail {
+  display: block;
+}
+
+.topnav-cart:hover .topnav-link {
+  background-color: #fff;
+  color: #ff6700;
+}
