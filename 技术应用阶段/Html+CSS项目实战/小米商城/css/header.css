@@ -70,3 +70,85 @@
 .header-menu:hover .header-submenu {
   display: block;
 }
+
+/* 搜索区域 */
+.header-search {
+  margin-top: 25px;
+  position: relative;
+}
+
+.header-search input {
+  width: 245px;
+  height: 50px;
+  font-size: 16px;
+  padding: 0 15px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+.header-search .header-search-icon {
+  width: 55px;
+  height: 50px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-left: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.header-search-icon i {
+  font-size: 20px;
+  color: #777;
+}
+
+.header-suggest {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 245px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  display: none;
+  z-index: 97;
+}
+
+.header-suggest a {
+  display: block;
+  font-size: 12px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+}
+
+.header-suggest a:hover {
+  background-color: #f5f5f5;
+  color: inherit;
+}
+
+.header-search input:focus ~ .header-suggest {
+  display: block;
+}
+
+.header-search input:hover {
+  border-color: #aaa;
+}
+
+.header-search input:hover ~ .header-search-icon {
+  border-color: #aaa;
+}
+
+.header-search input:focus,
+.header-search .header-suggest,
+.header-search input:focus ~ .header-search-icon {
+  border-color: #ff6700;
+}
+
+.header-search-icon:hover {
+  background-color: #ff6700;
+  border: 1px solid #ff6700;
+}
+
+.header-search-icon:hover i {
+  color: #fff;
+}
