@@ -1,6 +1,5 @@
 .banner {
   height: 460px;
-  outline: 1px solid #ccc;
   position: relative;
 }
 
@@ -57,4 +56,62 @@
 .banner-dots span.banner-dot-active {
   border-color: rgba(0, 0, 0, 0.4);
   background-color: #ccc;
+}
+
+/* 横幅菜单 */
+.banner-menu {
+  width: 234px;
+  height: 100%;
+  background-color: rgba(105, 101, 101, 0.6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px 0;
+}
+
+.banner-menu-item {
+  color: #fff;
+  padding: 0 20px 0 30px;
+  height: 42px;
+  line-height: 42px;
+}
+
+.banner-menu li:hover .banner-menu-item {
+  background-color: #ff6700;
+}
+
+.banner-menu li:hover .banner-sub-menu {
+  display: block;
+}
+
+.banner-sub-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 234px;
+  height: 100%;
+  width: 992px;
+  border: 1px solid #eee;
+  background: #fff;
+}
+
+.banner-sub-menu a {
+  width: 25%;
+  height: 16.666%;
+  padding: 0 20px;
+}
+
+.banner-sub-menu a img {
+  width: 40px;
+  height: 40px;
+  margin-top: 17px;
+  margin-right: 12px;
+}
+.banner-sub-menu span {
+  width: 154px;
+  margin-top: 28px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
