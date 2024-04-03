@@ -1,0 +1,77 @@
+.banner2 {
+  margin-top: 14px;
+  margin-bottom: 24px;
+}
+
+.banner2-service {
+  width: 234px;
+  height: 170px;
+  outline: 1px solid #ccc;
+  margin-right: 14px;
+  background-color: #5f5750;
+  padding: 3px;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.banner2-service a:hover {
+  color: #fff;
+}
+
+.banner2-service .iconfont {
+  font-size: 36px;
+  display: block;
+}
+
+.banner2-service a {
+  width: 76px;
+  height: 82px;
+  text-align: center;
+  padding-top: 10px;
+  position: relative;
+}
+
+.banner2-service a::before,
+.banner2-service a::after {
+  content: "";
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.banner2-service a::before {
+  content: "";
+  width: 1px;
+  height: 70px;
+  top: 6px;
+  left: 0;
+}
+
+.banner2-service a::after {
+  width: 64px;
+  height: 1px;
+  left: 6px;
+  bottom: 0;
+}
+
+.banner2-service a:nth-child(3n + 1)::before {
+  content: none;
+}
+.banner2-service a:nth-child(n + 4)::after {
+  content: none;
+}
+
+.banner2-item {
+  width: 316px;
+  height: 170px;
+  outline: 1px solid #ccc;
+  margin-right: 15px;
+}
+
+.banner2-item:last-child {
+  margin-right: 0;
+}
+
+.banner2-item img {
+  width: 316px;
+  height: 170px;
+}
