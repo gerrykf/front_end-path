@@ -1,0 +1,20 @@
+.main {
+  padding: 22px 0;
+}
+
+.banner3 {
+  height: 120px;
+  display: block;
+  background-color: red;
+
+  /* a元素中含有图片时 不会撑满整个a元素高度 底部会留白 */
+  /* 解决方式1： */
+  /* font-size: 0; */
+}
+
+.banner3 img {
+  width: 100%;
+  height: 120px;
+  /* 解决方式2：如果a元素中有文字时 设置字体不适用 （img标签默认是行盒）*/
+  display: block;
+}

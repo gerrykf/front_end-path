@@ -6,7 +6,6 @@
 .banner2-service {
   width: 234px;
   height: 170px;
-  outline: 1px solid #ccc;
   margin-right: 14px;
   background-color: #5f5750;
   padding: 3px;
@@ -63,7 +62,6 @@
 .banner2-item {
   width: 316px;
   height: 170px;
-  outline: 1px solid #ccc;
   margin-right: 15px;
 }
 
