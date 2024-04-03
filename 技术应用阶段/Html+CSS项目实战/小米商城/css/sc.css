@@ -1,0 +1,82 @@
+.sc {
+  margin-top: 10px;
+}
+
+.sc-top {
+  height: 58px;
+  line-height: 58px;
+}
+
+.sc-title {
+  font-size: 22px;
+  font-weight: normal;
+}
+
+.sc-more .iconfont {
+  background: #aaa;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  line-height: 20px;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.sc-more:hover .iconfont {
+  background: #ff6700;
+}
+
+.sc-item-first {
+  width: 234px;
+  height: 614px;
+}
+
+/* 这里一个知识点 img的父元素是a 但是a是行盒 所以会继续往上找块盒父元素的宽高 */
+.sc-item-first img {
+  width: 100%;
+  height: 100%;
+}
+
+.sc-item-list {
+  width: 978px;
+  margin-left: 14px;
+}
+
+.sc-item {
+  width: 234px;
+  height: 300px;
+  margin-right: 14px;
+  margin-bottom: 14px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.sc-item:nth-child(4n) {
+  margin-right: 0;
+}
+.sc-item:nth-child(n + 4) {
+  margin-bottom: 0;
+}
+
+.sc-item img {
+  width: 160px;
+  height: 160px;
+  margin-top: 20px;
+}
+
+.sc-name {
+  margin-top: 20px;
+  color: #333;
+}
+
+.sc-desc {
+  font-size: 12px;
+  color: #b0b0b0;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+.sc-price {
+  color: #ff6700;
+}
