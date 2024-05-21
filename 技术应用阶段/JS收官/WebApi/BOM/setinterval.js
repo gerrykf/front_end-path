@@ -1,4 +1,6 @@
 var timerId;
+var curIndex = 1;
+var img = document.querySelector(".container img");
 
 function start() {
   // 防止重复启动
@@ -7,10 +9,8 @@ function start() {
   }
 
   timerId = setInterval(function () {
-    console.clear();
-    console.log(
-      new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
-    );
+    curIndex = (curIndex % 3) + 1;
+    img.src = `./images/${curIndex}.jpg`;
   }, 1000);
 }
 
