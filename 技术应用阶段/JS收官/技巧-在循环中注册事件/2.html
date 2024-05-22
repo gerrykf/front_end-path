@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <button>按钮</button>
+      <button>按钮</button>
+      <button>按钮</button>
+      <button>按钮</button>
+      <button>按钮</button>
+      <button>按钮</button>
+      <button>按钮</button>
+      <button>按钮</button>
+      <button>按钮</button>
+      <button>按钮</button>
+    </div>
+
+    <script>
+      // 1.使用事件委托为按钮绑定点击事件
+      //   const container = document.querySelector(".container");
+      //   container.onclick = function (e) {
+      //     if (e.target.tagName === "BUTTON") {
+      //       var children = Array.prototype.slice.call(container.children);
+      //       var i = children.indexOf(e.target);
+      //       console.log(i);
+      //     }
+      //   };
+
+      //2. 使用for循环绑定事件
+      //2.1 使用let声明变量 让i变成块级作用域
+      const buttons = document.querySelectorAll("button");
+      //   for (let i = 0; i < buttons.length; i++) {
+      //     buttons[i].onclick = function () {
+      //       console.log(i);
+      //     };
+      //   }
+      //2.2 使用闭包 解决变量共享问题
+      for (var i = 0; i < buttons.length; i++) {
+        (function (i) {
+          buttons[i].onclick = function () {
+            console.log(i);
+          };
+        })(i);
+      }
+    </script>
+  </body>
+</html>
