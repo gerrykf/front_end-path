@@ -1,0 +1,10 @@
+h1 {
+  color: red;
+  font-size: 30px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  display: none;
+}
