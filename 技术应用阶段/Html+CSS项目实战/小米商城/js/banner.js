@@ -2,20 +2,20 @@ var banner = (function () {
   var datas = [
     // 随机生成一些轮播图图片数据
     {
-      img: "https://gd-hbimg.huaban.com/9bd8b87348578fc9b9ac59fdcae9731ae3317527268ed-GKVYnW_fw658webp",
-      link: "https://huaban.com/pins/4881791200?from=similarMaterial&searchWord=%E5%95%86%E5%9F%8E%E8%BD%AE%E6%92%AD%E5%9B%BE",
+      img: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/397f2569b126d8fba446b6bbf57ef771.jpg?w=2452&h=920",
+      link: "https://www.xiaomiev.com/",
     },
     {
-      img: "https://gd-hbimg.huaban.com/2dcec6c8e51a662a6ed1bd8659a9cd63fb08e6b61be2c-6kdVpB_fw658webp",
-      link: "https://huaban.com/pins/4881791200?from=similarMaterial&searchWord=%E5%95%86%E5%9F%8E%E8%BD%AE%E6%92%AD%E5%9B%BE",
+      img: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/4fc3e16fae19bca20536a4d1de9da943.jpg?thumb=1&w=1226&h=460&f=webp&q=90",
+      link: "https://www.mi.com/shop/buy/detail?product_id=19835",
     },
     {
-      img: "https://gd-hbimg.huaban.com/f9d2acc58c3d9f0aecb42ac66cb4cdc0ef0c67a326872-gTpkYn_fw658webp",
-      link: "https://huaban.com/pins/4881791200?from=similarMaterial&searchWord=%E5%95%86%E5%9F%8E%E8%BD%AE%E6%92%AD%E5%9B%BE",
+      img: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8fbeb7319f6413f0ec0ee2ba1bed0aaa.jpg?thumb=1&w=1226&h=460&f=webp&q=90",
+      link: "https://www.mi.com/a/h/40674.html?sign=fa0afc93fe174d78fe69489b2d0284b6",
     },
     {
-      img: "https://gd-hbimg.huaban.com/d9d3d1b75848b5c74024e24992c47e7b8555a5c31dc44-U1VWxD_fw658webp",
-      link: "https://huaban.com/pins/4881791200?from=similarMaterial&searchWord=%E5%95%86%E5%9F%8E%E8%BD%AE%E6%92%AD%E5%9B%BE",
+      img: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b82cdb12380866905927fb833a838be9.jpg?thumb=1&w=1226&h=460&f=webp&q=90",
+      link: "https://www.mi.com/shop/buy/detail?product_id=20007",
     },
   ];
 
