@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过渡</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: salmon;
+        margin: 0 auto;
+      }
+
+      .box:hover {
+        /* 动画名称 动画持续时间 动画次数(0-? infinite) 正向与方向播放(默认只有正向) */
+        animation: test 2s infinite ease-in-out alternate 1s;
+      }
+      @keyframes test {
+        0% {
+          width: 100px;
+          height: 100px;
+          background-color: tan;
+        }
+        50% {
+          width: 200px;
+          height: 100px;
+          background-color: bg-yellow-100;
+        }
+        100% {
+          width: 200px;
+          height: 200px;
+          background-color: #008c8c;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

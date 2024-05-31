@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过渡</title>
+    <style>
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: salmon;
+        border-radius: 50%;
+        transition: 0.5s;
+
+        position: fixed;
+        inset: 0;
+      }
+
+      p {
+        margin: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <p>在屏幕上点击任意位置试一试</p>
+    <p>此效果需要用到JS</p>
+
+    <script>
+      var boxEL = document.querySelector(".box");
+      function changeBoxPosition(event) {
+        console.log(event);
+        // 获取鼠标的位置
+        var x = event.clientX - 25;
+        var y = event.clientY - 25;
+
+        boxEL.style.transform = "translate(" + x + "px, " + y + "px)";
+      }
+
+      window.addEventListener("click", changeBoxPosition);
+    </script>
+  </body>
+</html>
