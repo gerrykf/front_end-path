@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 80%;
+        height: 500px;
+        margin: 0 auto;
+        border: 2px solid rgb(59, 59, 59);
+      }
+
+      .inner,
+      .item {
+        width: 80%;
+        height: 80%;
+      }
+
+      .inner {
+        background-color: rgb(242, 171, 85);
+        border: 2px solid rgb(237, 199, 149);
+      }
+
+      .item {
+        background-color: rgb(250, 135, 135);
+        border: 2px solid rgb(249, 159, 159);
+      }
+    </style>
+    <style>
+      .container,
+      .inner,
+      .item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="inner">
+        <div class="item">
+          <div class="inner">
+            <div class="item">
+              <div class="inner">
+                <div class="item"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
