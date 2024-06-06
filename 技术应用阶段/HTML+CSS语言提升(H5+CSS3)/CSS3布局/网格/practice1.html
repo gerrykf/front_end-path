@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 100%;
+        border: 1px solid rgb(152, 152, 152);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .item {
+        background-color: rgb(251, 255, 192);
+        border: 1px solid rgb(172, 234, 245);
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        line-height: 100px;
+      }
+    </style>
+
+    <style>
+      .container {
+        /* 默认是流式布局 */
+        /* 设置成grid后变成网格布局  但是没其他属性前是一行一行的 */
+        display: grid;
+        /* 将网格分成 4等份，每一列的宽度一样 */
+        grid-template-columns: repeat(4, 1fr);
+        /* 行与行之间10px空隙 */
+        row-gap: 10px;
+        justify-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+      <div class="item">6</div>
+      <div class="item">7</div>
+      <div class="item">8</div>
+      <div class="item">9</div>
+      <div class="item">10</div>
+      <div class="item">11</div>
+      <div class="item">12</div>
+      <div class="item">13</div>
+      <div class="item">14</div>
+      <div class="item">15</div>
+      <div class="item">16</div>
+      <div class="item">17</div>
+      <div class="item">18</div>
+      <div class="item">19</div>
+      <div class="item">20</div>
+      <div class="item">21</div>
+    </div>
+  </body>
+</html>

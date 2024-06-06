@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #916c6c;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+        text-align: center;
+        margin: 100px auto;
+        border-radius: 50%;
+        padding: 10px;
+        /*
+         * x y 模糊半径 扩散范围 颜色
+         * 可以设置多个阴影，用逗号隔开
+         * 阴影是从上到下的顺序
+         */
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.5), 0 0 30px 20px #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">这是一个盒子</div>
+  </body>
+</html>

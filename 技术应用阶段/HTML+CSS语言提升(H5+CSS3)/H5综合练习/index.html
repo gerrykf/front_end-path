@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <video src="../HTML5文档/assets/demo.mp4"></video>
+      <div class="controls">
+        <button id="play">播放/暂停</button>
+      </div>
+      <div class="controls">
+        进度：
+        <input id="progress" type="range" min="0" max="100" value="0" />
+        <span id="current">当前</span>
+        /
+        <span id="total">总时长</span>
+      </div>
+      <div class="controls" id="volumn">
+        音量：
+        <input type="range" min="0" max="100" value="0" />
+        <span class="volumn">50%</span>
+      </div>
+      <div class="controls" id="rate">
+        播放速率：
+        <button data-value="0.5">0.5倍</button>
+        <button class="active" data-value="1">1倍</button>
+        <button data-value="1.5">1.5倍</button>
+        <button data-value="2">2倍</button>
+      </div>
+      <div class="controls settings">
+        <button class="fullscreen">全屏</button>
+        <button class="save">保存设置</button>
+        <button class="load">加载设置</button>
+      </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      video {
+        width: 400px;
+        height: 500px;
+        object-fit: contain;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        浏览器有策略 不允许网站自动播放 如果是静音的话就可以自动播放
+        音频也是如此
+     -->
+    <video src="./assets/demo.mp4" controls autoplay muted loop></video>
+    <audio src="./assets/sample-15s.mp3" controls></audio>
+  </body>
+</html>

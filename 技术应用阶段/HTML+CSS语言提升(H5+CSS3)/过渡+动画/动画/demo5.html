@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过渡</title>
+    <style>
+      .menu {
+        width: 200px;
+        background-color: #f0f0f0;
+        padding: 10px;
+      }
+      .menu ul {
+        list-style: none;
+        padding: 0;
+      }
+      .menu ul li {
+        margin-bottom: 10px;
+      }
+      .menu ul li a {
+        display: block;
+        background-color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        color: #333;
+      }
+
+      .menu ul li ul {
+        padding-left: 10px;
+        height: 0;
+        overflow: hidden;
+        transition: 0.5s;
+      }
+      .menu ul li:hover ul {
+        display: block;
+      }
+      .menu ul li ul li {
+        margin-bottom: 5px;
+      }
+      .menu ul li ul li a {
+        background-color: #f0f0f0;
+      }
+      .menu ul li ul li a:hover {
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 写一个后台两级菜单 -->
+    <div class="menu">
+      <ul>
+        <li>
+          <a href="#">菜单1</a>
+          <ul class="sub-menu">
+            <li><a href="#">子菜单1</a></li>
+            <li><a href="#">子菜单2</a></li>
+            <li><a href="#">子菜单3</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">菜单2</a>
+          <ul class="sub-menu">
+            <li><a href="#">子菜单1</a></li>
+            <li><a href="#">子菜单2</a></li>
+            <li><a href="#">子菜单3</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">菜单3</a>
+          <ul class="sub-menu">
+            <li><a href="#">子菜单1</a></li>
+            <li><a href="#">子菜单2</a></li>
+            <li><a href="#">子菜单3</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <script>
+      var menus = document.querySelectorAll(".menu>ul>li");
+      for (var i = 0; i < menus.length; i++) {
+        var menu = menus[i];
+        console.log(menu);
+        var menuTitle = menu.querySelector(".menu>ul>li>a");
+        menuTitle.onclick = handleClick;
+      }
+
+      function handleClick() {
+        var ul = this.nextElementSibling;
+        // 除了当前点击的ul，其他的ul都要关闭
+        var otherUls = document.querySelectorAll(".menu>ul>li>ul");
+        for (var i = 0; i < otherUls.length; i++) {
+          var otherUl = otherUls[i];
+          if (otherUl !== ul) {
+            otherUl.style.height = "0";
+          }
+        }
+        if (ul.clientHeight > 0) {
+          ul.style.height = "0";
+          return;
+        }
+        ul.style.height = "100px";
+      }
+    </script>
+  </body>
+</html>

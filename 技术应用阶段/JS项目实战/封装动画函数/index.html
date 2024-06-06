@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      .move-block {
+        width: 100px;
+        height: 300px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      活动价：￥
+      <span>500.00</span>
+    </h1>
+
+    <div class="move-block"></div>
+    <script src="./animate.js"></script>
+    <script>
+      var span = document.querySelector("span");
+      createAnimation({
+        from: 500,
+        to: 99,
+        duration: 15,
+        totalMS: 500,
+        onmove: function (val) {
+          console.log(val);
+          span.innerHTML = val.toFixed(2);
+        },
+        onend: function () {
+          console.log("end");
+          span.style.color = "red";
+        },
+      });
+
+      var moveBlock = document.querySelector(".move-block");
+      moveBlock.onclick = function () {
+        createAnimation({
+          from: 300,
+          to: 100,
+          duration: 15,
+          onmove: function (val) {
+            moveBlock.style.height = val + "px";
+          },
+          onend: function () {
+            console.log("end");
+            moveBlock.style.backgroundColor = "green";
+          },
+        });
+      };
+    </script>
+  </body>
+</html>

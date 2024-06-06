@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .btn {
+        outline: none;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 50px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        /* 默认样式： 渐变颜色 */
+        background: linear-gradient(to bottom, #acd4ff, #4293fc);
+        color: #fff;
+        border-radius: 5px;
+      }
+
+      /* 点击按钮的样式 */
+      .btn:active {
+        background: #4293fc;
+        box-shadow: 0 0 0 3px #fff, 0 0 0 4px #4293fc;
+      }
+
+      p {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn">Click me</button>
+    <p>渐变颜色： #acd4ff -> #4293fc</p>
+  </body>
+</html>

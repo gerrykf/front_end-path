@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+        border: 2px solid rgb(231, 246, 235);
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(236, 171, 147);
+        border: 2px solid rgb(255, 128, 0);
+      }
+    </style>
+    <style>
+      .container {
+        display: flex;
+        /* 弹性盒父容器 主轴排列方式 */
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过渡</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: salmon;
+        margin: 0 auto;
+
+        /* 过渡: 过渡属性 过渡时间 过渡函数 过渡延迟 */
+        /* 过渡属性: all= width height background */
+        transition: 0.5s linear 0.5s;
+      }
+      .box:hover {
+        width: 200px;
+        height: 200px;
+        background-color: tan;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

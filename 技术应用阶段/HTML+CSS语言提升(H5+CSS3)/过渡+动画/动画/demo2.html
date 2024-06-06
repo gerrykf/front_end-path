@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过渡</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        background: url(./images/hasiqi.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+
+        border-radius: 50%;
+        opacity: 0.5;
+        margin-top: 50px;
+        transition: 0.5s;
+      }
+
+      .box:hover {
+        /* 鼠标移上去放大1.5倍 正向播放 移出反向播放 */
+        opacity: 1;
+        transform: scale(1.5) rotate(360deg);
+        box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

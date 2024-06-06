@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: space-around;
+        background-color: #f1f1f1;
+      }
+      .menu li {
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+      .menu li.active {
+        background-color: #4caf50;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="menu">
+      <li class="active">item</li>
+      <li>item</li>
+      <li>item</li>
+      <li>item</li>
+      <li>item</li>
+    </ul>
+
+    <script>
+      // 点击li标签，切换active类名
+      const lis = document.querySelectorAll(".menu li");
+      console.log(lis);
+      for (let i = 0; i < lis.length; i++) {
+        lis[i].addEventListener("click", function () {
+          // 在添加active类名之前，先把所有li标签的active类名去掉
+          var beforeActive = document.querySelector(".menu li.active");
+          beforeActive.classList.remove("active");
+          this.classList.add("active");
+        });
+      }
+    </script>
+  </body>
+</html>

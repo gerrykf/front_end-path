@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>过渡</title>
+    <style>
+      .menu {
+        background-color: rgb(114, 227, 250);
+        position: relative;
+        margin: 0 auto;
+        width: 120px;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+      .menu h2 {
+        margin: 0;
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+      }
+      .sub-menu {
+        box-sizing: border-box;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        padding: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        transition: 0.2s ease-in-out;
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+      .menu:hover .sub-menu {
+        transform: scaleY(1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu">
+      <h2>下拉菜单</h2>
+      <ul class="sub-menu">
+        <li>子菜单1</li>
+        <li>子菜单2</li>
+        <li>子菜单3</li>
+        <li>子菜单4</li>
+      </ul>
+    </div>
+  </body>
+</html>
