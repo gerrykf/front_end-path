@@ -64,3 +64,5 @@
 <a href="./技术应用阶段/HTML+CSS语言提升(H5+CSS3)/过渡+动画/动画/loading.html">加载效果</a>
 
 <a href="./技术应用阶段/HTML+CSS语言提升(H5+CSS3)/过渡+动画/动画/demo7.html">摇荡的怀表</a>
+
+<a href="./技术应用阶段/Html+CSS项目实战/小米商城/index.html">摇荡的怀表</a>
