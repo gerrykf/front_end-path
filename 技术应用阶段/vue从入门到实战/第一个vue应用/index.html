@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>第一个vue应用</title>
+  </head>
+  <body>
+    <!-- 这块儿视图变成了vue对象的模板 -->
+    <div id="app">
+      <h1>系统名称：{{ title }}</h1>
+      <ul>
+        <li v-for="(item,index) in products">
+          {{ index + 1 }}. {{ item.name }} -
+          <button @click="item.price--">-</button>
+          ￥{{ item.price?item.price:'无货' }}
+          <button @click="item.price++">+</button>
+          <button @click="remove(index)">删除</button>
+        </li>
+        <span v-if="products.length">总计: ￥{{ total }}</span>
+      </ul>
+    </div>
+    <!-- 引入vue -->
+    <script src="./vue.min.js"></script>
+    <script>
+      // 创建vue实例
+      var vm = new Vue({
+        // 将一块儿html区域挂载到vue实例上
+        el: "#app",
+        // 数据
+        data: {
+          title: "库存管理系统",
+          products: [
+            { name: "商品1", price: 10 },
+            { name: "商品2", price: 20 },
+            { name: "商品3", price: 30 },
+          ],
+        },
+        computed: {
+          // 计算属性（会监听使用的变量的变化）
+          total() {
+            // this 指向当前vue实例
+            return this.products.reduce((total, item) => total + item.price, 0);
+          },
+        },
+        methods: {
+          // 方法
+          remove(index) {
+            this.products.splice(index, 1);
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
