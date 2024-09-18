@@ -17,6 +17,8 @@
 - [vue-cli](#vue-cli)
   - [SFC](#sfc)
   - [预编译](#预编译)
+  - [计算属性](#计算属性)
+  - [style scoped](#style-scoped)
 
 ## vue 入门概念
 
@@ -320,3 +322,62 @@ https://play.vuejs.org/#eNp9kUFLwzAUx7/KM5cqzBXR0+gGKgP1oKKCl1xG99ZlpklIXuag9Lv7
 ![alt text](image-10.png)
 
 ![alt text](image-9.png)
+
+### 计算属性
+
+```html
+<template>
+  <div id="app">
+    <h3>{{ getFullName() }}</h3>
+    <h3>{{ getFullName() }}</h3>
+    <h3>{{ getFullName() }}</h3>
+    <h3>{{ fullName }}</h3>
+    <h3>{{ fullName }}</h3>
+    <h3>{{ fullName }}</h3>
+    <button @click="changeName">Change</button>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "App",
+    data() {
+      return {
+        firstName: "John",
+        lastName: "Doe",
+      };
+    },
+    computed: {
+      fullName() {
+        console.log("fullName called");
+        return this.firstName + "" + this.lastName;
+      },
+    },
+    methods: {
+      getFullName() {
+        console.log("getFullName called");
+        return this.firstName + "" + this.lastName;
+      },
+      changeName() {
+        console.log("changeName called");
+        this.firstName = "Jane";
+        this.lastName = "Smith";
+      },
+    },
+  };
+</script>
+```
+
+![alt text](image-8.png)
+
+可以看到只要改变了依赖项 方法只要调用过一次就会重新执行一次 而计算属性只执行一次并且缓存结果，之后的调用直接使用缓存的结果
+
+> vue 会收集计算属性的依赖，这里收集了 firstName 跟 lastName,依赖项变化时才会重新调用计算属性的 getter 函数 而方法每次会调用(注意：它只收集响应式数据，声明在 data 中的变量)
+
+> 含义上的区别：计算属性表示数据 方法代码功能
+
+### style scoped
+
+作用域样式对于子组件根元素的影响
+![alt text](image-11.png)
+这是为了方便在父组件区控制子组件的样式(仅仅只针对子组件的根元素，子元素不生效)
