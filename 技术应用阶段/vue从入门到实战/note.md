@@ -14,6 +14,9 @@
       - [局部注册](#局部注册)
       - [应用组件](#应用组件)
       - [向组件传递数据](#向组件传递数据)
+- [vue-cli](#vue-cli)
+  - [SFC](#sfc)
+  - [预编译](#预编译)
 
 ## vue 入门概念
 
@@ -198,6 +201,8 @@ var vm = new Vue({
 
 最常见的一种传递方式就是 **compoennt props**
 
+- 数组形式接受数据：
+
 ```js
 var myComp = {
   props:['p1','p2','p3'];
@@ -228,3 +233,90 @@ var otherComp = {
 ```
 
 > 注意 在组件内部不能更改传递过来的属性，这叫做单向数据流，只能改自己内部 的 data 数据
+
+- 对象形式接受数据:
+
+```js
+var myComp = {
+  props:{
+    url:String
+  };
+  template:`
+    <div>
+      {{p1}},{{p2}},{{p3}}
+    </div>
+  `
+}
+```
+
+## vue-cli
+
+https://cli.vuejs.org/zh/guide/installation.html
+
+vue-cli 是一个脚手架工具，用于搭建 vue 工程
+
+它内部使用了 webpack，并预置了许多插件(plugin)和加载器(loader),以达到开箱即用的效果
+
+除了基本的插件和加载器外，vue-cli 还预置了：
+
+- babel
+- webpack-dev-server
+- eslint
+- postcss
+- less-loader
+
+### SFC
+
+单文件组件，Single File Component,即一个文件就包含了一个组件所需要的全部代码
+
+### 预编译
+
+当 vue-cli 进行**打包**时，会直接把组件中的模板转换为 **render** 函数，这叫做模板预编译
+
+这样做的好处在于：
+
+1. 运行时不需要在编译模板了，提高运行效率
+2. 打包结果中不再需要 vue 的编译代码，减少了打包体积
+
+- SFC
+
+```html
+<template>
+  <h1>Hello World</h1>
+</template>
+<script>
+  export default {};
+</script>
+```
+
+- vue
+
+1. 响应式系统
+2. 运行时系统
+3. 模板编译系统
+
+- bundle
+
+1. 模板编译系统将 SFC 中的**template**中的内容编译为 render 函数
+2. 响应式系统
+3. 运行时系统
+
+---
+
+```js
+var comp = {
+  render(h) {
+    return h("h1", "Hello World");
+  },
+};
+```
+
+![alt text](image-7.png)
+
+> render 函数是最终编译结果，无论是组件中的 template 还是 SFC 中的 template 最终都是会经过 vue 的模板编译系统 将其编译为 render 函数
+
+https://play.vuejs.org/#eNp9kUFLwzAUx7/KM5cqzBXR0+gGKgP1oKKCl1xG99ZlpklIXuag9Lv7krK5w9it7//7v/SXthP3zo23EcVEVKH2yhEEpOhm0qjWWU/QgccV9LDytoWCq4U00tTWBII2NDBN/LJ4Qq0tfFuvlxfFlTRVORzHB/FA2Dq9IOQJoFrfzLouL/d9VfKUU2VcJNhet3aJeioFcymgZFiVR/tiJCjw61eqGW+CNWzepX0pats6pdG/OVKsJ8UEMklswXa/LzkjH3G0z+s11j8n8k3YpUyKd48B/RalODBa+AZpwPPPV9zx8wGyfdTcPgM/MFgdk+NQe4hmydpHvWz7nL+/Ms1XmO8ITdhfKommZp/7UvA/eTxz9X/d2/Fd3pOmF/0fEx+nNQ==
+
+![alt text](image-10.png)
+
+![alt text](image-9.png)
