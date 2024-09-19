@@ -1,0 +1,23 @@
+@import "./var.less";
+
+html {
+  color: @words;
+  font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: @gray;
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    color: @primary;
+  }
+}

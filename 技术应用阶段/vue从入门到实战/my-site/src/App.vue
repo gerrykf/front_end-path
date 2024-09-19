@@ -1,18 +1,17 @@
 <template>
   <div id="app">
     <h1>APP组件</h1>
-    <Icon name="home" :size="50" />
-    <Icon name="about" :size="50" />
+    <Pager />
   </div>
 </template>
 
 <script>
-import Icon from "./components/Icon.vue";
+import Pager from "./components/Pager/index.vue";
 
 export default {
   name: "App",
   components: {
-    Icon,
+    Pager,
   },
   data() {
     return {
