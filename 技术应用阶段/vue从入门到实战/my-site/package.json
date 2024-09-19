@@ -5,9 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:Pager":"vue serve ./src/components/Pager/test.vue",
-    "test:Avatar":"vue serve ./src/components/Avatar/test.vue",
-    "test:Icon":"vue serve ./src/components/Icon/test.vue"
+    "test:Pager": "vue serve ./src/components/Pager/test.vue",
+    "test:Avatar": "vue serve ./src/components/Avatar/test.vue",
+    "test:Icon": "vue serve ./src/components/Icon/test.vue",
+    "test:Layout": "vue serve ./src/components/Layout/test.vue"
   },
   "dependencies": {
     "core-js": "^3.6.5",

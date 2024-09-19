@@ -9,6 +9,7 @@
 const classMap = {
   home: "icon-shouye",
   about: "icon-guanyu_o",
+  empty: "icon-empty",
 };
 
 export const types = Object.keys(classMap);
@@ -33,6 +34,6 @@ export default {
 };
 </script>
 <style>
-@import url("//at.alicdn.com/t/c/font_4687021_kbs77ojf4mi.css");
+@import url("//at.alicdn.com/t/c/font_4687021_86znnizo473.css");
 </style>
 <style scoped></style>
