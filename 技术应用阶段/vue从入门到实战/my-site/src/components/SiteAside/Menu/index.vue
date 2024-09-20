@@ -14,8 +14,8 @@
   </nav>
 </template>
 <script>
-import "../../styles/var.less";
-import Icon from "../Icon/index.vue";
+import "../../../styles/var.less";
+import Icon from "../../Icon/index.vue";
 export default {
   name: "Menu",
   components: {
@@ -66,7 +66,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import "../../styles/var.less";
+@import "../../../styles/var.less";
 .menu-container {
   color: @gray;
   width: 100%;

@@ -1,15 +1,15 @@
 <template>
   <div class="test-container">
-    <Menu />
+    <Contact />
   </div>
 </template>
 <script>
-import Menu from "./index.vue";
-import "../../styles/var.less";
+import Contact from "./index.vue";
+import "../../../styles/var.less";
 export default {
-  name: "TestMenu",
+  name: "TestContact",
   components: {
-    Menu,
+    Contact,
   },
   data() {
     return {};
@@ -19,12 +19,12 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import "../../styles/var.less";
 .test-container {
-  width: 200px;
-  height: 600px;
-  background-color: @dark;
-  color: @gray;
+  width: 250px;
+  height: 800px;
+  background-color: #000;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

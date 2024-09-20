@@ -1,15 +1,15 @@
 <template>
   <div class="test-container">
-    <Contact />
+    <SiteAside />
   </div>
 </template>
+
 <script>
-import Contact from "./index.vue";
-import "../../styles/global.less";
+import SiteAside from "./index.vue";
 export default {
-  name: "TestContact",
+  name: "TestSiteAside",
   components: {
-    Contact,
+    SiteAside,
   },
   data() {
     return {};
@@ -18,6 +18,7 @@ export default {
   methods: {},
 };
 </script>
+
 <style lang="less" scoped>
 .test-container {
   width: 250px;

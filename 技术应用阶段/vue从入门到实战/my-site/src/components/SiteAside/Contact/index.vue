@@ -31,7 +31,7 @@
   </ul>
 </template>
 <script>
-import Icon from "../Icon/index.vue";
+import Icon from "../../Icon/index.vue";
 export default {
   name: "Contact",
   components: {
