@@ -1,16 +1,17 @@
 <template>
   <nav class="menu-container">
-    <a
+    <RouterLink
+      :exact="item.exact"
+      :to="item.link"
+      active-class="selected"
       v-for="item in menus"
       :key="item.link"
-      :class="{ selected: isSelected(item) }"
-      @click="goTo(item.link)"
     >
       <div>
         <Icon :name="item.icon" />
       </div>
       <span>{{ item.title }}</span>
-    </a>
+    </RouterLink>
   </nav>
 </template>
 <script>
@@ -25,25 +26,32 @@ export default {
     return {
       menus: [
         {
+          name: "home",
           link: "/",
           title: "首页",
           icon: "home",
+          exact: true,
         },
         {
-          link: "/blog",
+          name: "blog",
+          link: "/blog/123",
           title: "文章",
           icon: "about",
-          startWith: true,
+          exact: false, // 严格匹配
         },
         {
+          name: "about",
           link: "/about",
           title: "关于",
           icon: "about",
+          exact: true,
         },
         {
+          name: "empty",
           link: "/empty",
           title: "空",
           icon: "empty",
+          exact: true,
         },
       ],
     };
@@ -60,7 +68,7 @@ export default {
       }
     },
     goTo(path) {
-      location.href = path;
+      this.$router.push(path);
     },
   },
 };
@@ -70,18 +78,20 @@ export default {
 .menu-container {
   color: @gray;
   width: 100%;
+
   a {
     display: flex;
     align-items: center;
     padding: 0px 50px;
     height: 45px;
-    div {
-      margin-right: 10px;
-    }
     &.selected {
       background-color: @primary;
       color: @white;
       cursor: pointer;
+      transform: all 0.3s;
+    }
+    div {
+      margin-right: 10px;
     }
   }
 }

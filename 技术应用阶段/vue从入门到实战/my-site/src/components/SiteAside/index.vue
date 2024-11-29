@@ -3,7 +3,7 @@
     <div class="avatar">
       <Avatar
         url="https://avatars.githubusercontent.com/u/47231161?v=4"
-        size="100"
+        :size="100"
       />
     </div>
     <Menu />
@@ -38,7 +38,7 @@ export default {
 .site-aside-container {
   min-width: 250px;
   max-width: 250px;
-  height: 800px;
+  height: 100%;
   background-color: #000;
   display: flex;
   flex-direction: column;
