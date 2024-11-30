@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>组件</title>
+  </head>
+  <body>
+    <div id="app">
+      <my-button></my-button>
+      <my-button></my-button>
+      <my-button></my-button>
+      <my-title title="标题1"></my-title>
+      <my-title title="标题2"></my-title>
+    </div>
+    <script src="../第一个vue应用/vue.min.js"></script>
+    <script>
+      var myButton = {
+        // 组件的数据必须是一个函数(是为了避免组件之间的数据共享，因为data返回的是一个对象，对象是引用类型，每次使用这个组件时都是返回的新对象)
+        data: function () {
+          return {
+            count: 0,
+          };
+        },
+        template: '<button @click="count++">你点击了{{ count }}次</button>',
+      };
+
+      var myTitle = {
+        props: ["title"],
+        template: "<h1>{{title}}</h1>",
+      };
+
+      // 全局注册组件(可以在任何地方使用)
+      //   Vue.component("my-button", myButton);
+
+      var vm = new Vue({
+        el: "#app",
+        components: {
+          // 局部注册组件(只能在当前实例中使用)
+          "my-button": myButton,
+          "my-title": myTitle,
+        },
+        data: {
+          message: "Hello Vue!",
+        },
+      });
+    </script>
+  </body>
+</html>
