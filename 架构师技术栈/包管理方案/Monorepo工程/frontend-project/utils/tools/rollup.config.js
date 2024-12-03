@@ -7,7 +7,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import json from "@rollup/plugin-json";
 import babel from "@rollup/plugin-babel";
 
-const extensions = [".js", ".ts"];
+const extensions = [".js"];
 
 // 导出一个数组，数组里面每一项对应一种格式的配置
 export default [
