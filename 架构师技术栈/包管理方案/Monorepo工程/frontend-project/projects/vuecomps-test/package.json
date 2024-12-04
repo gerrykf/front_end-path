@@ -1,23 +1,11 @@
 {
-  "name": "vue-comps",
+  "name": "vuecomps-test",
   "version": "0.0.0",
   "private": true,
-  "module": "dist/gy-lib.es.ts",
-  "types": "dist/types/lib.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/gy-lib.es.ts",
-      "types": "./dist/types/lib.d.ts"
-    },
-    "./assets/main.css": "./dist/assets/vue-comps.css"
-  },
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
-    "lib": "vite build && pnpm run postbuild",
-    "postbuild": "node postbuild.js",
-    "test:unit": "vitest",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
@@ -25,7 +13,8 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue-comps": "workspace:^"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",

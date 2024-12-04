@@ -2,25 +2,18 @@
   "compilerOptions": {
     "target": "ES2015",
     "module": "ES2015",
+    "declaration": true,
+    "declarationDir": "dist/types",
     "moduleResolution": "node",
-    "importHelpers": true,
-    "experimentalDecorators": true,
-    "strictFunctionTypes": false,
-    "skipLibCheck": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "allowJs": false,
-    "resolveJsonModule": true,
-    "lib": ["ESNext", "DOM"],
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "types": ["node", "vitest/globals", "@vue/test-utils", "vite/client"]
   },
   "include": ["src/**/*", "test/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "tests", "src/main.ts"]
 }
