@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>平滑滚动到目标位置</title>
+  </head>
+  <body>
+    <button id="scrollBtn">Scroll to 500px</button>
+
+    <script>
+      const scrollBtn = document.getElementById("scrollBtn");
+
+      scrollBtn.addEventListener("click", () => {
+        const targetPosition = 500;
+        const duration = 1000; // 动画持续 1 秒
+        const startPosition = window.scrollY;
+        const startTime = performance.now();
+
+        function scrollAnimation(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1); // 确保进度不超过 1
+          const scrollY =
+            startPosition + (targetPosition - startPosition) * progress;
+
+          window.scrollTo(0, scrollY);
+
+          if (progress < 1) {
+            requestAnimationFrame(scrollAnimation);
+          }
+        }
+
+        requestAnimationFrame(scrollAnimation);
+      });
+    </script>
+  </body>
+</html>
