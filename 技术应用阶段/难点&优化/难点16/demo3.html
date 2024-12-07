@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分帧渲染大列表</title>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <!-- <script>
+      // 无优化版本
+      const container = document.getElementById("container");
+      const items = Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`);
+
+      items.forEach((item) => {
+        const div = document.createElement("div");
+        div.textContent = item;
+        container.appendChild(div);
+      });
+    </script> -->
+
+    <script>
+      // 优化版本
+      const container = document.getElementById("container");
+      const items = Array.from({ length: 1000 }, (_, i) => `Item ${i + 1}`);
+      const chunkSize = 100; // 每帧渲染 50 条
+
+      function renderChunk(startIndex) {
+        const fragment = document.createDocumentFragment();
+        const endIndex = Math.min(startIndex + chunkSize, items.length);
+
+        for (let i = startIndex; i < endIndex; i++) {
+          const div = document.createElement("div");
+          div.textContent = items[i];
+          fragment.appendChild(div);
+        }
+
+        container.appendChild(fragment);
+
+        if (endIndex < items.length) {
+          requestAnimationFrame(() => renderChunk(endIndex));
+        }
+      }
+
+      renderChunk(0);
+    </script>
+  </body>
+</html>

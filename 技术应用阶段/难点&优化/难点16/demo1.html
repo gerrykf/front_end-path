@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>基本动画示例</title>
+  </head>
+  <body>
+    <div
+      id="box"
+      style="
+        width: 50px;
+        height: 50px;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        background-color: blue;
+        position: absolute;
+      "
+    >
+      RAF
+    </div>
+
+    <div
+      id="box2"
+      style="
+        width: 50px;
+        height: 50px;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        background-color: blue;
+        position: absolute;
+        top: 70px;
+      "
+    >
+      ST
+    </div>
+
+    <script>
+      /**
+       *创建一个平移动画，使用 requestAnimationFrame 实现：
+       */
+
+      /**
+       * requestAnimationFrame 与 setTimeout 的区别
+       * 1. requestAnimationFrame 会自动调整帧率，如果页面不可见，动画会暂停
+       * 2. setTimeout 会一直执行，如果页面不可见，动画会继续执行
+       */
+      const box = document.getElementById("box");
+      const box2 = document.getElementById("box2");
+      let position = 0;
+      let position2 = 0;
+
+      function animate() {
+        position += 2; // 每帧移动 2 像素
+        box.style.transform = `translateX(${position}px)`;
+
+        if (position < 500) {
+          requestAnimationFrame(animate); // 继续下一帧
+        }
+      }
+
+      function animateTime() {
+        position2 += 2; // 每帧移动 2 像素
+        box2.style.transform = `translateX(${position2}px)`;
+
+        if (position2 < 500) {
+          setTimeout(animateTime, 1000 / 60); // 60 帧
+        }
+      }
+
+      animate(); // 启动动画
+      animateTime(); // 启动动画
+    </script>
+  </body>
+</html>
