@@ -50,7 +50,10 @@ optimizeDeps: {
   、图片压缩
 - 分包策略
 - 构建分析
-- 摇树优化
+- 摇树优化(Tree Shaking)
+  摇树优化会移除未使用的代码，减少最终打包体积。
+  优化建议：
+  使用支持 Tree Shaking 的第三方库（如 lodash-es 替代 lodash）。
 - CDN 加速
 
 - 开发阶段
