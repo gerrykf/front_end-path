@@ -9,10 +9,12 @@ const handleUserRouter = (req, res) => {
     const { username, password } = req.body;
     const result = login(username, password);
 
-    if (result) {
-      return new SuccessModel();
-    }
-    return new ErrorModel("登录失败");
+    return result.then((data) => {
+      if (data.username) {
+        return new SuccessModel();
+      }
+      return new ErrorModel("登录失败");
+    });
   }
 };
 

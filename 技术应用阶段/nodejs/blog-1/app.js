@@ -64,9 +64,13 @@ const serverHandle = (req, res) => {
     }
 
     // 处理 user 路由
-    const userData = handleUserRouter(req, res);
-    if (userData) {
-      res.end(JSON.stringify(userData));
+    // controllrt 中返回的promise 路由中处理时，返回的是一个promise
+    const userResult = handleUserRouter(req, res);
+    if (userResult) {
+      userResult.then((userData) => {
+        res.end(JSON.stringify(userData));
+      });
+
       return;
     }
 

@@ -1,3 +1,5 @@
+const { exec } = require("../db/mysql");
+
 /**
  * 用户登录
  * @param {*} username
@@ -5,11 +7,13 @@
  * @returns
  */
 const login = (username, password) => {
-  if (username === "zhangsan" && password === "123") {
-    console.log("username:", username, "password:", password);
-    return true;
-  }
-  return false;
+  const sql = `
+    select username, realname from users where username='${username}' and password='${password}';
+  `;
+
+  return exec(sql).then((rows) => {
+    return rows[0] || {};
+  });
 };
 
 module.exports = {
