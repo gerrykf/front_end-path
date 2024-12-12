@@ -3,6 +3,8 @@
   - [项目结构](#项目结构)
   - [mysql](#mysql)
   - [cookie](#cookie)
+  - [session](#session)
+  - [redis](#redis)
 
 # nodejs
 
@@ -266,3 +268,83 @@ module.exports = { exec };
     ```
 
 - 全选单个函数名称 ctrl + D
+
+## session
+
+cookie 中一般不存储明文相关信息，并且 cookie 只能存储 5kb 数据
+
+解决：
+cookie 中存储 userid,server 端对应 username,因为 server 端没有数据大小限制
+
+- 使用 session 存在的问题
+
+目前 session 直接是 js 变量,放在 nodejs 进程内存中
+
+```js
+// session 数据
+const SESSION_DATA = {};
+
+// 解析 session
+let needSetCookie = false;
+let userId = req.cookie.userid;
+
+// 已登录
+if (userId) {
+  if (!SESSION_DATA[userId]) {
+    SESSION_DATA[userId] = {};
+  }
+
+  console.log("SESSION_DATA--", SESSION_DATA);
+} else {
+  // 未登录
+  needSetCookie = true;
+  userId = `${Date.now()}_${Math.random()}`;
+  SESSION_DATA[userId] = {};
+}
+req.session = SESSION_DATA[userId];
+```
+
+1. 进程内存有限，访问量过大，内存暴增怎么办？
+2. 正式线上环境是多进程，进程直接内存无法共享
+
+问题的根源来自于 session 数据目前储存在进程的内存中 如果数据过大 内存会被挤爆
+
+解决方案 redis（及 redis 使用场景）
+
+- 为什么 session 适合用 redis?
+  1. session 访问频率高，对性能要求高
+  2. session 可不考虑断电丢失数据问题（内存的硬伤）
+  3. session 数据量不会很大（相比于 mysql 中存储的数据）
+- 为什么网站数据不适合用 redis?
+  1. 操作频率不是太高（相比于 session 操作）
+  2. 断电不能丢失，必须保留(只适合保存到硬盘数据库中)
+  3. 数据量太大，内存成本过高
+
+## redis
+
+- web server 最常用的缓存数据库，数据放在内存中
+- 相比 MySQL，访问速度快（内存和硬盘不是一个数量级的）
+- 但是成本更高，可存储的数据量更小（内存的硬伤 ）
+  ![alt text](image-3.png)
+
+- Windows [http://www.runoob.com/redis/redis-install.html]
+- Mac 使用 `brew install redis`
+
+- 启动 redis-server.exe
+  ![alt text](image-4.png)
+- 运行 redis-cli
+
+```shell
+D:\software\Redis-x64-5.0.14.1>redis-cli.exe
+127.0.0.1:6379> set mykey abc
+OK
+127.0.0.1:6379> get mykey
+"abc"
+127.0.0.1:6379>
+```
+
+- 操作 redis
+  `set [key] [value]`
+  `get [key]`
+  `keys *`
+  `del [key]`
