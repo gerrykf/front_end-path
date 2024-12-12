@@ -2,6 +2,7 @@
   - [nodejs 与 JavaScript 的区别](#nodejs-与-javascript-的区别)
   - [项目结构](#项目结构)
   - [mysql](#mysql)
+  - [cookie](#cookie)
 
 # nodejs
 
@@ -194,3 +195,74 @@ function exec(sql) {
 
 module.exports = { exec };
 ```
+
+## cookie
+
+- 什么时 cookie
+  1. 存储在浏览器中的一段字符串（最大 5kb）
+  2. 跨域不共享
+  3. 格式如 k1=v1;k2=v2;k3=v3; 因此可以存储结构化数据
+  4. 每次发送 http 请求，会将请求域的 cookie 一起发送给 server
+  5. server 端可以修改 cookie 并返回给浏览器
+  6. 浏览器中也可以通过 javascript 修改 cookie（有限制）
+- javascript 操作 cookie,浏览器中查看 cookie
+  - 客户端查看 cookie 三种方式
+    1. ![alt text](image.png)
+    2. ![alt text](image-1.png)
+    3. ![alt text](image-2.png)
+  - javascript 查看、修改 cookie（有限制）
+    1. 做累加(会追加到 cookie 值的后边)
+       document.cookie = 'k1=100;'
+- server 端操作 cookie,实现登录验证
+
+  - 查看 cookie
+
+    ```js
+    // 解析 cookie
+    const cookieStr = req.headers.cookie || ""; // k1=v1;k2=v2;k3=v3
+    req.cookie = {}; // 用来存储cookie
+    cookieStr.split(";").forEach((item) => {
+      if (!item) {
+        return;
+      }
+
+      const arr = item.split("=");
+      const key = arr[0];
+      const val = arr[1];
+      req.cookie[key] = val;
+    });
+    console.log("req.cookie--", req.cookie);
+    ```
+
+  - 修改 cookie
+
+    ```js
+    // 操作 cookie  before
+    res.setHeader("Set-Cookie", `username=${data.username}; path=/;`);
+
+    // 限制前端修改cookie after
+    // 操作 cookie  path=/ 表示根目录下都可以访问  httpOnly 表示只能通过后端修改
+    // 操作 cookie  path=/ 表示根目录下都可以访问  httpOnly 表示只能通过后端修改 expires 表示过期时间
+    res.setHeader(
+      "Set-Cookie",
+      `username=${
+        data.username
+      }; path=/; httpOnly; expires=${getCookieExpires()}`
+    );
+    ```
+
+  - 实现登录验证
+
+    ```js
+    // 登录验证的测试   -- http://localhost:8000/api/user/login-test
+    if (method === "GET" && req.path === "/api/user/login-test") {
+      if (req.cookie.username) {
+        return Promise.resolve(
+          new SuccessModel({ username: req.cookie.username })
+        );
+      }
+      return Promise.resolve(new ErrorModel("尚未登录"));
+    }
+    ```
+
+- 全选单个函数名称 ctrl + D
