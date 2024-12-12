@@ -130,3 +130,67 @@ mqsql 新特性 varchar(10) 数据类型
 select version();
 -- 8.4.0
 ```
+
+- 根据 NODE_ENV 区分配置
+
+```json
+// package.json
+"dev": "cross-env NODE_ENV=dev nodemon bin/www.js",
+"prod": "cross-env NODE_ENV=prod nodemon bin/www.js"
+```
+
+```js
+// src/config/db.js
+// 配置
+let MYSQL_CONF;
+
+if (env === "dev") {
+  MYSQL_CONF = {
+    host: "localhost",
+    user: "root",
+    password: "000000",
+    port: "3306",
+    database: "myblog",
+  };
+}
+
+if (env === "prod") {
+  MYSQL_CONF = {
+    host: "localhost",
+    user: "root",
+    password: "000000",
+    port: "3306",
+    database: "myblog",
+  };
+}
+```
+
+> pnpm dev -- 运行后处于开发模式
+
+- 封装 exec 函数，API 使用操作数据库
+
+```js
+const mysql = require("mysql2");
+const { MYSQL_CONF } = require("../config/db");
+
+// 创建连接对象
+const con = mysql.createConnection(MYSQL_CONF);
+
+// 开始连接
+con.connect();
+
+// 统一执行 sql 的函数
+function exec(sql) {
+  return new Promise((resolve, reject) => {
+    con.query(sql, (err, result) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(result);
+    });
+  });
+}
+
+module.exports = { exec };
+```
