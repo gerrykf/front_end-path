@@ -7,6 +7,9 @@ const route = useRoute();
 <template>
   <header>
     <div class="wrapper" v-if="!route.meta.allowAnonymous">
+      <RouterLink to="/login">
+        <div style="display: flex; justify-content: end">登录</div>
+      </RouterLink>
       <nav>
         <RouterLink to="/">列表界面</RouterLink>
         <RouterLink to="/admin">管理中心</RouterLink>
