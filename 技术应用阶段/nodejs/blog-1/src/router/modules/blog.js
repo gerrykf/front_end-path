@@ -80,7 +80,9 @@ const handleBlogRouter = async (req, res) => {
       return loginCheckResult;
     }
 
-    req.body.author = req.session.username; // 登录的用户名
+    console.log("req is", req);
+    // req.body.author = req.session.username; // 登录的用户名
+    req.body.author = "zhangsan"; // 假数据
     const result = newBlog(req.body);
     return result.then((data) => {
       return new SuccessModel(data);
@@ -115,7 +117,8 @@ const handleBlogRouter = async (req, res) => {
       return loginCheckResult;
     }
 
-    const author = req.session.username; // 登录的用户名
+    // const author = req.session.username; // 登录的用户名
+    const author = "zhangsan"; // 假数据
     const result = delBlog(id, author);
 
     return result.then((val) => {

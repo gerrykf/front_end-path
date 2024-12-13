@@ -15,6 +15,10 @@ const loginRules = ref({
 });
 
 const login = async () => {
+  if (!loginForm.value.username || !loginForm.value.password) {
+    ElMessage.error("请填写完整");
+    return;
+  }
   console.log("loginForm:", loginForm);
   const res = await post("/api/user/login", loginForm.value);
   console.log("res:", res);
