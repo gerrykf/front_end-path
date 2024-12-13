@@ -61,8 +61,8 @@ const serverHandle = (req, res) => {
   req.query = querystring.parse(url.split("?")[1]);
 
   // 解析 cookie
-  const cookieStr = req.headers.cookie || ""; // k1=v1;k2=v2;k3=v3
-  req.cookie = {}; // 用来存储cookie
+  req.cookie = {};
+  const cookieStr = req.headers.cookie || "";
   cookieStr.split(";").forEach((item) => {
     if (!item) {
       return;
@@ -73,34 +73,35 @@ const serverHandle = (req, res) => {
     const val = arr[1].trim();
     req.cookie[key] = val;
   });
-  console.log("req.cookie--", req.cookie);
 
   // 解析 session
   let needSetCookie = false;
   let userId = req.cookie.userid;
-
-  // 解析 session（使用 redis）
   if (!userId) {
     needSetCookie = true;
     userId = `${Date.now()}_${Math.random()}`;
-    // 初始化 redis 中的 session 值
     set(userId, {});
   } else {
-    // 获取 session
-    req.sessionId = userId;
-    get(req.sessionId).then((sessionData) => {
-      if (sessionData == null) {
-        // 初始化 redis 中的 session 值
-        set(req.sessionId, {});
-        // 设置 session
-        req.session = {};
-      } else {
-        req.session = sessionData;
+    get(userId).then((data) => {
+      if (!data) {
+        set(userId, {});
       }
-
-      console.log("req.session--", req.session);
     });
   }
+
+  req.sessionId = userId;
+
+  get(req.sessionId).then((sessionData) => {
+    if (sessionData == null) {
+      // 初始化 redis 中的 session 值
+      set(req.sessionId, {});
+      req.session = {};
+    } else {
+      req.session = sessionData;
+    }
+
+    return getPostData(req);
+  });
 
   // 处理 post data
   getPostData(req).then((postData) => {

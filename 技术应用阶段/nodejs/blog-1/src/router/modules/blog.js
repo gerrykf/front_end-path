@@ -5,28 +5,55 @@ const {
   updateBlog,
   delBlog,
 } = require("../../controller/blog");
+const { get } = require("../../db/redis");
 const { SuccessModel, ErrorModel } = require("../../model/resModel");
 
-/**
- * 登录验证
- * @param {*} req
- * @returns
- */
+// 统一的登录验证函数
 const loginCheck = (req) => {
-  if (!req.session.username) {
-    return Promise.resolve(new ErrorModel("尚未登录"));
-  }
+  console.log("loginCheck", req.session);
+
+  get(req.sessionId).then((sessionData) => {
+    if (sessionData == null) {
+      // 未登录
+      return Promise.resolve(new ErrorModel("尚未登录"));
+    }
+    // 已登录
+    return Promise.resolve(new SuccessModel(sessionData));
+  });
 };
 
-const handleBlogRouter = (req, res) => {
+const handleBlogRouter = async (req, res) => {
   const method = req.method;
   const id = req.query.id || "";
 
   // 获取博客列表
   if (method === "GET" && req.path === "/api/blog/list") {
-    const author = req.query.author || "";
+    let author = req.query.author || "";
     const keyword = req.query.keyword || "";
-    // const listData = getList(author, keyword);
+
+    // 管理员界面
+    if (req.query.isadmin) {
+      const loginCheckResult = await loginCheck(req);
+      if (loginCheckResult) {
+        // 未登录
+        return loginCheckResult;
+      }
+
+      get(req.sessionId).then((sessionData) => {
+        if (sessionData.username == null) {
+          // 未登录
+          return Promise.resolve(new ErrorModel("尚未登录"));
+        }
+        // 强制查询自己的博客
+        author = sessionData.username;
+
+        const result = getList(author, keyword);
+        return result.then((listData) => {
+          return new SuccessModel(listData);
+        });
+      });
+    }
+
     const result = getList(author, keyword);
     return result.then((listData) => {
       return new SuccessModel(listData);

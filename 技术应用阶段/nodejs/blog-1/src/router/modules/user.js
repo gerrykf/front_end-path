@@ -12,28 +12,27 @@ const handleUserRouter = (req, res) => {
   const method = req.method;
 
   // 登录
-  if (method === "GET" && req.path === "/api/user/login") {
-    const { username, password } = req.query;
+  if (method === "POST" && req.path === "/api/user/login") {
+    const { username, password } = req.body;
     const result = login(username, password);
-
     return result.then((data) => {
       if (data.username) {
         // 设置 session
         req.session.username = data.username;
         req.session.realname = data.realname;
 
-        console.log("req.session--", req.sessionId);
-
         // 同步到 redis
         set(req.sessionId, req.session);
 
-        return new SuccessModel();
+        console.log("req.session is", req.session);
+
+        return new SuccessModel(data, "登录成功");
       }
       return new ErrorModel("登录失败");
     });
   }
 
-  // 登录验证的测试
+  // 登录验证的测试;
   // if (method === "GET" && req.path === "/api/user/login-test") {
   //   if (req.session.username) {
   //     return Promise.resolve(

@@ -5,6 +5,7 @@
   - [cookie](#cookie)
   - [session](#session)
   - [redis](#redis)
+  - [nginx](#nginx)
 
 # nodejs
 
@@ -348,3 +349,97 @@ OK
   `get [key]`
   `keys *`
   `del [key]`
+
+## nginx
+
+场景：
+
+- 登录功能依赖 cookie,必须使用浏览器联调
+- cookie 跨域不共享，前端和 server 端必须同域(都在本地用一个端口会导致一方不能运行)
+- 需要用到 nginx 做代理，让前后端同域
+
+介绍：
+
+- 高性能的 web 服务器，开源免费
+- 一般用于做静态服务器、负载均衡
+- 反向代理（该 demo 使用到）
+
+下载安装：
+
+- windows [http://nginx.org/en/download.html]
+- mac `brew install nginx`
+
+> 配置文件
+> windows: C:\nginx\conf\nginx.conf
+> mac: /usr/local/etc/nginx/nginx.conf
+
+测试配置文件格式是否正确
+
+> `nginx -t`
+
+启动
+
+> `nginx.exe` or `start nginx` > ![alt text](image-5.png)
+
+重启
+
+> `nginx.exe -s reload`
+
+停止
+
+> `nginx.exe -s stop`
+
+- nginx 文件配置
+
+```conf
+server {
+  listen       8888;
+  server_name  localhost;
+
+  # ...
+  location / {
+      proxy_pass http://localhost:8001;
+  }
+
+  location /api/ {
+      proxy_pass http://localhost:8000;
+      proxy_set_header Host $host;
+
+      # 添加跨域支持
+      add_header Access-Control-Allow-Origin *;
+      add_header Access-Control-Allow-Methods GET,POST,PUT,DELETE,OPTIONS;
+      add_header Access-Control-Allow-Headers Content-Type,Authorization;
+
+      # 处理 OPTIONS 请求
+      if ($request_method = 'OPTIONS') {
+          add_header Access-Control-Allow-Origin *;
+          add_header Access-Control-Allow-Methods GET,POST,PUT,DELETE,OPTIONS;
+          add_header Access-Control-Allow-Headers Content-Type,Authorization;
+          return 204;
+      }
+  }
+}
+```
+
+> `listen 8888;` 监听一个代理的端口
+> `server_name  localhost;` 服务器 ip 或者域名
+
+```conf
+location / {
+  proxy_pass http://localhost:8001;
+}
+```
+
+> 配置 `/` 需要代理到的地址 "这里指前端地址"
+
+```conf
+location /api/ {
+      proxy_pass http://localhost:8000;
+      proxy_set_header Host $host;
+  }
+```
+
+> 配置 `/api/` 需要代理到的地址 "这里值 server"
+
+- 测试请求
+  > 前端从 8000 请求 `listen 8888;` 配置的这个端口 看是否能请求到服务端的数据 代理到 8001
