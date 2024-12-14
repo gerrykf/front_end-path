@@ -1,6 +1,9 @@
 const path = require("path");
 // 引入 SpeedMeasurePlugin 用于性能分析
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // 是否为生产环境
 const isProduction = process.env.NODE_ENV === "production";
@@ -28,21 +31,55 @@ const webpackConfig = {
       {
         test: /\.m?js$/, // 匹配 `.js` 和 `.mjs` 文件
         exclude: /node_modules/, // 排除第三方库
-        use: {
-          loader: "swc-loader", // 使用 swc 替代 babel 进行快速编译
-          options: {
-            jsc: {
-              parser: {
-                syntax: "ecmascript",
-                jsx: true, // 如果项目中有 JSX，启用支持
+        use: [
+          {
+            loader: "swc-loader", // 使用 swc 替代 babel 进行快速编译
+            options: {
+              jsc: {
+                parser: {
+                  syntax: "ecmascript",
+                  jsx: true, // 如果项目中有 JSX，启用支持
+                },
+                target: "es5", // 指定输出目标
               },
-              target: "es5", // 指定输出目标
             },
           },
-        },
+          {
+            loader: "thread-loader",
+            options: {
+              workers: 4, // 根据系统核心数设置，默认是 CPU 核心数 - 1
+            },
+          },
+        ],
+      },
+      {
+        test: /\.vue$/,
+        loader: "vue-loader",
+        use: [
+          {
+            loader: "thread-loader",
+          },
+          {
+            loader: "vue-loader",
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: [
+          isProduction ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+        ],
       },
     ],
   },
+  plugins: [
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+    }),
+    ...(isProduction ? [new MiniCssExtractPlugin()] : []),
+  ],
   cache: {
     // 文件缓存配置
     type: "filesystem", // 使用文件系统缓存
