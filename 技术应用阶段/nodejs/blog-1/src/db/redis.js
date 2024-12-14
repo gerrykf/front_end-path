@@ -6,6 +6,7 @@ const redisClient = redis.createClient(REDIS_CONF);
 redisClient.on("error", (err) => {
   console.error(err);
 });
+console.log("redisClient is ready");
 
 function set(key, val) {
   if (typeof val === "object") {

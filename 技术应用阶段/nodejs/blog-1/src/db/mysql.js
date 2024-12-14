@@ -7,6 +7,8 @@ const con = mysql.createConnection(MYSQL_CONF);
 // 开始连接
 con.connect();
 
+console.log("mysql is ready");
+
 // 统一执行 sql 的函数
 function exec(sql) {
   return new Promise((resolve, reject) => {
@@ -22,4 +24,5 @@ function exec(sql) {
 
 module.exports = {
   exec,
+  escape: mysql.escape,
 };

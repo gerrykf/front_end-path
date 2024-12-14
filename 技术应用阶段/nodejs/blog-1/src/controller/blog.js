@@ -1,5 +1,6 @@
 /* 业务逻辑层 controller 与路由层 router 的分离 该层只关心数据的来源 */
 const { exec } = require("../db/mysql");
+const xss = require("xss");
 
 /**
  * 获取博客列表
@@ -43,6 +44,8 @@ const newBlog = (blogData = {}) => {
   console.log("newBlog blogData...", blogData);
 
   const { title, content, author } = blogData;
+  title = xss(title);
+  content = xss(content);
   const createTime = Date.now();
 
   const sql = `

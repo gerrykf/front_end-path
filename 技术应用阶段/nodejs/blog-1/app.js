@@ -3,6 +3,7 @@
 const querystring = require("querystring");
 const { handleBlogRouter, handleUserRouter } = require("./src/router");
 const { get, set } = require("./src/db/redis.js");
+const { access } = require("./src/utils/log");
 
 /**
  * 获取 cookie 的过期时间
@@ -50,6 +51,13 @@ const getPostData = (req) => {
 };
 
 const serverHandle = (req, res) => {
+  // 记录 access log
+  access(
+    `${req.method} -- ${req.url} -- ${req.headers["user-agent"]} -- ${new Date(
+      Date.now()
+    ).toLocaleDateString()} ${new Date(Date.now()).toLocaleTimeString()}`
+  );
+
   // 设置返回格式 JSON
   res.setHeader("Content-type", "application/json");
 
@@ -91,6 +99,8 @@ const serverHandle = (req, res) => {
 
   req.sessionId = userId;
 
+  console.log("req.sessionId is", req.sessionId);
+
   get(req.sessionId).then((sessionData) => {
     if (sessionData == null) {
       // 初始化 redis 中的 session 值
@@ -106,6 +116,8 @@ const serverHandle = (req, res) => {
   // 处理 post data
   getPostData(req).then((postData) => {
     req.body = postData;
+
+    console.log("req.body is", req.body);
 
     // 处理 blog 路由
     const blogResult = handleBlogRouter(req, res);
@@ -129,6 +141,7 @@ const serverHandle = (req, res) => {
     const userResult = handleUserRouter(req, res);
     if (userResult) {
       userResult.then((userData) => {
+        console.log("userData is", userData);
         if (needSetCookie) {
           res.setHeader(
             "Set-Cookie",

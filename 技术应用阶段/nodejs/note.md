@@ -11,6 +11,14 @@
     - [nodejs 文件操作](#nodejs-文件操作)
     - [IO 操作的性能瓶颈](#io-操作的性能瓶颈)
       - [Stream](#stream)
+    - [日志拆分](#日志拆分)
+      - [crontab（定时任务工具）](#crontab定时任务工具)
+      - [日志分析](#日志分析)
+  - [安全](#安全)
+    - [mysql 中提供了 `escape`函数](#mysql-中提供了-escape函数)
+  - [XSS 攻击](#xss-攻击)
+  - [密码加密](#密码加密)
+  - [流程图](#流程图)
 
 # nodejs
 
@@ -480,3 +488,97 @@ location /api/ {
 
 - source
 - dest
+
+### 日志拆分
+
+- 日志内容会慢慢积累，放在一个文件中不好处理
+- 按照事件划分日志文件，如：2024-12-14.access.log
+- 实现方式：linux 的 crontab 命令，即 定时任务
+
+#### crontab（定时任务工具）
+
+- 设置定时任务，格式：`*****` command
+  > 五个`*` 从左到右表示：分钟、小时、日、月、年
+  > command 表示 生成脚本
+- 将 access.log 拷贝并重命名为 2024-12-14.access.log
+- 清空 access.log 文件，继续积累日志
+
+使用 git bash 控制台
+到`D:\LearnFolder\front_end-path\技术应用阶段\nodejs\blog-1\src\utils` 执行 `sh copy`
+
+```shell
+#!/bin/sh
+# 到指定目录
+cd D:/LearnFolder/front_end-path/技术应用阶段/nodejs/blog-1/logs
+# 复制文件 并重命名 为当前日期
+cp access.log $(date +%Y-%m-%d).access.log
+# 清空文件
+echo "" > access.log
+```
+
+在 linux 服务器上：
+
+1. 编辑 Cron 任务：
+
+   ```bash
+    crontab -e
+   ```
+
+2. 添加定时任务，例如每小时运行 copy.sh：
+
+   ```bash
+    0 * * * * /mnt/d/LearnFolder/front_end-path/技术应用阶段/nodejs/blog-1/src/utils/copy.sh
+   ```
+
+#### 日志分析
+
+- 如针对 access.log 日志，分析 chrome 的占比
+- 日志是按行存储的，一行就是一条日志
+- 使用 nodejs 的 readline（基于 stream,效率高）
+
+## 安全
+
+- sql 注入：窃取数据库内容
+- XSS 攻击：窃取前端的 cookie 内容
+- 密码加密：保障用户信息安全（重要）
+
+### mysql 中提供了 `escape`函数
+
+```js
+username = escape(username);
+password = escape(password);
+const sql = `
+    select username, realname from users where username='${username}' and password='${password}';
+  `;
+```
+
+防止这种 `where username='zhangsan' -- ' and password='123';` sql 攻击
+
+## XSS 攻击
+
+- 攻击方式：在页面展示内容中掺杂 js 代码，以获取网页内容
+- 预防措施：转换生成 js 的特殊字符
+
+> `pnpm add xss --save`
+
+```js
+const xss = require("xss");
+...
+title = xss(title);
+content = xss(content);
+const createTime = Date.now();
+
+const sql = `
+  insert into blogs (title, content, createtime, author)
+  values ('${title}', '${content}', ${createTime}, '${author}');`;
+```
+
+## 密码加密
+
+- 万一数据库被用户攻破，最不应该泄露的就是用户信息
+- 攻击方式：获取用户名和密码，再去尝试其他系统
+- 预防措施：将密码加密，即便拿到数据库密码也不知道明文
+
+## 流程图
+
+![alt text](image-6.png)
