@@ -19,6 +19,8 @@
   - [XSS 攻击](#xss-攻击)
   - [密码加密](#密码加密)
   - [流程图](#流程图)
+- [使用 express](#使用-express)
+  - [安装使用](#安装使用)
 
 # nodejs
 
@@ -582,3 +584,28 @@ const sql = `
 ## 流程图
 
 ![alt text](image-6.png)
+
+# 使用 express
+
+- express 是 nodejs 最常用的 web server 框架(类似于前端 vue、react 等)
+- 什么是框架？
+
+  1. 让开发人员专注于业务
+  2. 框架有自己的一套流程
+  3. 有现成的工具，不用自己写底层代码
+
+- express 下载、安装和使用，express 中间件机制
+- 开发接口，连接数据库，实现登录，日志记录
+- 分析 express 中间件原理
+
+## 安装使用
+
+- 安装（使用脚手架 express-generator）
+- 初始化代码介绍，处理路由
+- 使用中间件
+
+1. `pnpm add express-generator -g`
+2. `express blog-express`
+3. `pnpm i & pnpm start`
+
+默认 3000 端口 `http://localhost:3000`
