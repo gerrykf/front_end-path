@@ -29,6 +29,11 @@ const fetchData = async () => {
   });
   if (res.errno === 0) {
     tableData.value = res.data;
+  } else {
+    ElMessage({
+      message: res.message,
+      type: "error",
+    });
   }
 };
 

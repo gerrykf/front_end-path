@@ -19,8 +19,14 @@
   - [XSS 攻击](#xss-攻击)
   - [密码加密](#密码加密)
   - [流程图](#流程图)
+  - [前后端启动 连接并联调流程](#前后端启动-连接并联调流程)
+    - [启动后端](#启动后端)
 - [使用 express](#使用-express)
   - [安装使用](#安装使用)
+  - [express 中间件](#express-中间件)
+  - [express session](#express-session)
+  - [express 连接到 redis](#express-连接到-redis)
+  - [mrogen 日志](#mrogen-日志)
 
 # nodejs
 
@@ -365,6 +371,9 @@ OK
   `keys *`
   `del [key]`
 
+- 双击闪退问题
+  cmd 进入 redis 所在目录 执行 `redis-server.exe redis.windows.conf`
+
 ## nginx
 
 场景：
@@ -585,6 +594,14 @@ const sql = `
 
 ![alt text](image-6.png)
 
+## 前后端启动 连接并联调流程
+
+### 启动后端
+
+1. `pnpm dev` [http://localhost:8000] nginx 中代理的 `/api/`
+2. 启动 redis `cd C:\Program Files\Redis` 双击 `redis.server.exe`
+3. 启动 nginx 让前端通过 `http://localhost:8888/api/...` 指向后端 api
+
 # 使用 express
 
 - express 是 nodejs 最常用的 web server 框架(类似于前端 vue、react 等)
@@ -609,3 +626,100 @@ const sql = `
 3. `pnpm i & pnpm start`
 
 默认 3000 端口 `http://localhost:3000`
+
+## express 中间件
+
+函数中传递的函数就是中间件，第一个字符串参数如果没有传递定义出来的 会在下一次命中时执行例如：在浏览器访问`http://localhost:3000/api/get-cookie`,
+此时会先执行 `app.use((req,res,next){})` 没有传递第一个参数的定义，然后 next()会指向 app.get(...),再执行`app.get("/api/get-cookie",...)"`相关逻辑
+
+```js
+// app.use(str,func1,func2,func3...)
+
+app.use((req, res, next) => {
+  console.log("请求开始...", req.method, req.url);
+  next();
+});
+
+app.use((req, res, next) => {
+  // 假设在处理 cookie
+  req.cookie = {
+    userId: "abc123",
+  };
+  next();
+});
+
+app.get("/api", (req, res, next) => {
+  console.log("get /api 路由");
+  next();
+});
+
+app.get("/api/get-cookie", (req, res, next) => {
+  console.log("get /api/get-cookie");
+  res.json({
+    errno: 0,
+    data: req.cookie,
+  });
+});
+```
+
+## express session
+
+> `pnpm add express-session`
+
+```js
+const session = require("express-session");
+...
+app.use(
+  session({
+    secret: "WJiol_877#",
+    cookie: {
+      // path: "/", // 默认配置
+      // httpOnly: true, // 默认配置
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
+```
+
+## express 连接到 redis
+
+> `pnpm add redis@3 connect-redis`
+
+```js
+const RedisStore = require("connect-redis")(session);
+//...
+app.use(
+  session({
+    store: new RedisStore({ client: redisClient }), // 使用 Redis 作为会话存储
+    secret: "WJiol#23123", // 用于加密会话 ID 的密钥
+    resave: false, // 避免每次请求都重新保存会话
+    saveUninitialized: false, // 避免未初始化的会话被保存到存储中
+    cookie: {
+      secure: false, // 开发环境设置为 false，生产环境启用 HTTPS 时设为 true
+      httpOnly: true, // 阻止客户端脚本访问 Cookie
+      maxAge: 1000 * 60 * 60 * 24, // 会话过期时间：1 天
+    },
+  })
+);
+```
+
+## mrogen 日志
+
+```js
+const ENV = process.env.NODE_ENV;
+if (ENV !== "prod") {
+  // 开发环境 / 测试环境
+  app.use(logger("dev"));
+} else {
+  // 线上环境
+  const logFileName = path.join(__dirname, "logs", "access.log");
+  const writeStream = fs.createWriteStream(logFileName, {
+    flags: "a",
+  });
+  app.use(
+    logger("combined", {
+      stream: writeStream,
+    })
+  );
+}
+```
