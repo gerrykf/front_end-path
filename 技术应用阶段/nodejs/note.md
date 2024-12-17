@@ -27,6 +27,10 @@
   - [express session](#express-session)
   - [express 连接到 redis](#express-连接到-redis)
   - [mrogen 日志](#mrogen-日志)
+- [koa2](#koa2)
+  - [实现登录 基于 koa-generic-session 和 koa-redis](#实现登录-基于-koa-generic-session-和-koa-redis)
+  - [koa 日志](#koa-日志)
+  - [koa2 中间件](#koa2-中间件)
 
 # nodejs
 
@@ -294,6 +298,7 @@ module.exports = { exec };
 ## session
 
 cookie 中一般不存储明文相关信息，并且 cookie 只能存储 5kb 数据
+session 的理解：根据不同的浏览器请求 server 的会话，server 端会保存不同的值`req.session`
 
 解决：
 cookie 中存储 userid,server 端对应 username,因为 server 端没有数据大小限制
@@ -723,3 +728,74 @@ if (ENV !== "prod") {
   );
 }
 ```
+
+# koa2
+
+- express 中间件时异步回调，koa2 原生支持 async/await
+- 新开发框架和系统，都开始基于 koa2,；例如 egg.js
+- express 虽然未过时，但是 koa2 肯定是未来趋势
+
+1. `pnpm add koa-generator -g`
+2. `koa2 blog-koa2`
+3. `pnpm i & pnpm start`
+
+## 实现登录 基于 koa-generic-session 和 koa-redis
+
+`pnpm add koa-generic-session koa-redis --save`
+
+app.js
+
+```js
+const session = require("koa-generic-session");
+const redisStore = require("koa-redis");
+// logger
+...
+// session
+app.keys = ["WJiol#23123_"];
+app.use(
+  session({
+    // 配置 cookie
+    cookie: {
+      path: "/",
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+    // 配置 redis
+    store: redisStore({
+      // redis 的 ip 和端口
+      all: "127.0.0.1:6379", // redis 的地址
+    }),
+  })
+);
+
+//routes
+...
+```
+
+routes/user.js
+
+```js
+router.get("/session-test", async (ctx, next) => {
+  if (ctx.session.viewCount == null) {
+    ctx.session.viewCount = 0;
+  }
+  ctx.session.viewCount++;
+  ctx.body = {
+    errno: 0,
+    viewCount: ctx.session.viewCount,
+  };
+});
+```
+
+## koa 日志
+
+`pnpm add koa-morgan --save`
+
+## koa2 中间件
+
+[https://koa.bootcss.com/]
+
+分析
+
+1. 使用 app.use 用来注册中间件，先收集起来
+2. 实现 next 机制，即上一个通过 next 触发下一个
