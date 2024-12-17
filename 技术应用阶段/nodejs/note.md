@@ -31,6 +31,14 @@
   - [实现登录 基于 koa-generic-session 和 koa-redis](#实现登录-基于-koa-generic-session-和-koa-redis)
   - [koa 日志](#koa-日志)
   - [koa2 中间件](#koa2-中间件)
+- [线上环境](#线上环境)
+  - [PM2](#pm2)
+    - [PM2 学习目录](#pm2-学习目录)
+      - [PM2 介绍](#pm2-介绍)
+      - [进程守护](#进程守护)
+      - [PM2 配置和守护](#pm2-配置和守护)
+      - [PM2 多进程](#pm2-多进程)
+      - [关于运维](#关于运维)
 
 # nodejs
 
@@ -799,3 +807,118 @@ router.get("/session-test", async (ctx, next) => {
 
 1. 使用 app.use 用来注册中间件，先收集起来
 2. 实现 next 机制，即上一个通过 next 触发下一个
+
+# 线上环境
+
+- 服务器稳定性
+- 充分利用服务器硬件资源，以便提高性能
+- 线上日志记录
+
+## PM2
+
+PM2 的核心价值
+
+- 进程守护，系统崩溃自动重启
+- 启动多进程，充分利用 CPU 和内存
+- 自带日志记录功能
+
+### PM2 学习目录
+
+- PM2 介绍
+- PM2 进程守护
+- PM2 配置和守护
+- PM2 多进程
+- 关于服务器运维
+
+#### PM2 介绍
+
+1. 下载安装
+   `pnpm i pm2 -g`
+   `pm2 --version`
+2. 基本使用
+
+   ```json
+   // package.json
+   "scripts": {
+     "dev": "cross-env NODE_ENV=development nodemon app.js",
+     "prd": "cross-env NODE_ENV=production pm2 start app.js --name pm2-demo"
+   },
+   ```
+
+   `pnpm run prd` 会启动 pm2 进程，不会占用控制台
+   `pm2 list` 显示表格
+   ![alt text](image-7.png)
+
+3. 常用命令
+   `pm2 start ...`,`pm2 list`
+   `pm2 restart <AppName>/<id>`
+   `pm2 stop <AppName>/<id>`,`pm2 delete <AppName>/<id>`
+   `pm2 info <AppName>/<id>`
+   `pm2 log <AppName>/<id>`
+   `pm2 monit <AppName>/<id>`
+
+#### 进程守护
+
+- node app.js 和 nodemon app.js 进程崩溃则不能访问
+- PM2 遇到进程崩溃，会自动重启
+
+`http://localhost:8000/error`
+
+```js
+// ...
+// 模拟一个错误
+if (req.url === "/error") {
+  throw new Error("模拟错误");
+}
+//...
+```
+
+`pm2 restart pm2-demo` 遇到魔力的这个错误会自动重启
+
+#### PM2 配置和守护
+
+- 新建 PM2 配置文件(包括进程数量，日志文件目录等)
+- 修改 PM2 启动命令，重启
+- 访问 server,检查日志文件的内容等(日志记录是否生效)
+
+```json
+{
+  "app": {
+    "name": "pm2-demo-server",
+    "script": "app.js",
+    "watch": true,
+    "ignore_watch": ["node_modules", "logs"],
+    "error_file": "logs/err.log",
+    "out_file": "logs/out.log",
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "instances": 1,
+    "exec_mode": "cluster",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "env_production": {
+      "NODE_ENV": "production"
+    }
+  }
+}
+```
+
+#### PM2 多进程
+
+为何使用多进程
+
+- 操作系统限制一个进程的内存
+- 内存： 无法充分利用机器全部内存
+- CPU： 无法利用多核 CPU 的优势
+
+多进程和 redis
+![alt text](image-8.png)
+
+- 多进程之间，内存无法共享
+  通过 redis 实现内存共享 把 session 都存入 redis
+
+#### 关于运维
+
+- 服务器运维，一般都是由专业的 OP 人员和部门来处理
+- 大公司都有自己的运维团队
+- 中小型公司推荐使用一些云服务器，如 阿里云的 node 平台
