@@ -29,6 +29,11 @@ const fetchData = async () => {
   });
   if (res.errno === 0) {
     tableData.value = res.data;
+  } else {
+    ElMessage({
+      message: res.message,
+      type: "error",
+    });
   }
 };
 
@@ -52,6 +57,11 @@ const handleAdd = async (row: BlogItem) => {
       type: "success",
     });
     fetchData();
+  } else {
+    ElMessage({
+      message: res.message,
+      type: "error",
+    });
   }
 };
 
@@ -67,6 +77,11 @@ const handleEdit = async (row: BlogItem) => {
       type: "success",
     });
     fetchData();
+  } else {
+    ElMessage({
+      message: res.message,
+      type: "error",
+    });
   }
 };
 
@@ -79,6 +94,11 @@ const handleDelete = (row: BlogItem) => {
           type: "success",
         });
         fetchData();
+      } else {
+        ElMessage({
+          message: res.message,
+          type: "error",
+        });
       }
     });
 };

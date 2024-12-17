@@ -19,8 +19,26 @@
   - [XSS 攻击](#xss-攻击)
   - [密码加密](#密码加密)
   - [流程图](#流程图)
+  - [前后端启动 连接并联调流程](#前后端启动-连接并联调流程)
+    - [启动后端](#启动后端)
 - [使用 express](#使用-express)
   - [安装使用](#安装使用)
+  - [express 中间件](#express-中间件)
+  - [express session](#express-session)
+  - [express 连接到 redis](#express-连接到-redis)
+  - [mrogen 日志](#mrogen-日志)
+- [koa2](#koa2)
+  - [实现登录 基于 koa-generic-session 和 koa-redis](#实现登录-基于-koa-generic-session-和-koa-redis)
+  - [koa 日志](#koa-日志)
+  - [koa2 中间件](#koa2-中间件)
+- [线上环境](#线上环境)
+  - [PM2](#pm2)
+    - [PM2 学习目录](#pm2-学习目录)
+      - [PM2 介绍](#pm2-介绍)
+      - [进程守护](#进程守护)
+      - [PM2 配置和守护](#pm2-配置和守护)
+      - [PM2 多进程](#pm2-多进程)
+      - [关于运维](#关于运维)
 
 # nodejs
 
@@ -288,6 +306,7 @@ module.exports = { exec };
 ## session
 
 cookie 中一般不存储明文相关信息，并且 cookie 只能存储 5kb 数据
+session 的理解：根据不同的浏览器请求 server 的会话，server 端会保存不同的值`req.session`
 
 解决：
 cookie 中存储 userid,server 端对应 username,因为 server 端没有数据大小限制
@@ -364,6 +383,9 @@ OK
   `get [key]`
   `keys *`
   `del [key]`
+
+- 双击闪退问题
+  cmd 进入 redis 所在目录 执行 `redis-server.exe redis.windows.conf`
 
 ## nginx
 
@@ -585,6 +607,14 @@ const sql = `
 
 ![alt text](image-6.png)
 
+## 前后端启动 连接并联调流程
+
+### 启动后端
+
+1. `pnpm dev` [http://localhost:8000] nginx 中代理的 `/api/`
+2. 启动 redis `cd C:\Program Files\Redis` 双击 `redis.server.exe`
+3. 启动 nginx 让前端通过 `http://localhost:8888/api/...` 指向后端 api
+
 # 使用 express
 
 - express 是 nodejs 最常用的 web server 框架(类似于前端 vue、react 等)
@@ -609,3 +639,286 @@ const sql = `
 3. `pnpm i & pnpm start`
 
 默认 3000 端口 `http://localhost:3000`
+
+## express 中间件
+
+函数中传递的函数就是中间件，第一个字符串参数如果没有传递定义出来的 会在下一次命中时执行例如：在浏览器访问`http://localhost:3000/api/get-cookie`,
+此时会先执行 `app.use((req,res,next){})` 没有传递第一个参数的定义，然后 next()会指向 app.get(...),再执行`app.get("/api/get-cookie",...)"`相关逻辑
+
+```js
+// app.use(str,func1,func2,func3...)
+
+app.use((req, res, next) => {
+  console.log("请求开始...", req.method, req.url);
+  next();
+});
+
+app.use((req, res, next) => {
+  // 假设在处理 cookie
+  req.cookie = {
+    userId: "abc123",
+  };
+  next();
+});
+
+app.get("/api", (req, res, next) => {
+  console.log("get /api 路由");
+  next();
+});
+
+app.get("/api/get-cookie", (req, res, next) => {
+  console.log("get /api/get-cookie");
+  res.json({
+    errno: 0,
+    data: req.cookie,
+  });
+});
+```
+
+## express session
+
+> `pnpm add express-session`
+
+```js
+const session = require("express-session");
+...
+app.use(
+  session({
+    secret: "WJiol_877#",
+    cookie: {
+      // path: "/", // 默认配置
+      // httpOnly: true, // 默认配置
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
+```
+
+## express 连接到 redis
+
+> `pnpm add redis@3 connect-redis`
+
+```js
+const RedisStore = require("connect-redis")(session);
+//...
+app.use(
+  session({
+    store: new RedisStore({ client: redisClient }), // 使用 Redis 作为会话存储
+    secret: "WJiol#23123", // 用于加密会话 ID 的密钥
+    resave: false, // 避免每次请求都重新保存会话
+    saveUninitialized: false, // 避免未初始化的会话被保存到存储中
+    cookie: {
+      secure: false, // 开发环境设置为 false，生产环境启用 HTTPS 时设为 true
+      httpOnly: true, // 阻止客户端脚本访问 Cookie
+      maxAge: 1000 * 60 * 60 * 24, // 会话过期时间：1 天
+    },
+  })
+);
+```
+
+## mrogen 日志
+
+```js
+const ENV = process.env.NODE_ENV;
+if (ENV !== "prod") {
+  // 开发环境 / 测试环境
+  app.use(logger("dev"));
+} else {
+  // 线上环境
+  const logFileName = path.join(__dirname, "logs", "access.log");
+  const writeStream = fs.createWriteStream(logFileName, {
+    flags: "a",
+  });
+  app.use(
+    logger("combined", {
+      stream: writeStream,
+    })
+  );
+}
+```
+
+# koa2
+
+- express 中间件时异步回调，koa2 原生支持 async/await
+- 新开发框架和系统，都开始基于 koa2,；例如 egg.js
+- express 虽然未过时，但是 koa2 肯定是未来趋势
+
+1. `pnpm add koa-generator -g`
+2. `koa2 blog-koa2`
+3. `pnpm i & pnpm start`
+
+## 实现登录 基于 koa-generic-session 和 koa-redis
+
+`pnpm add koa-generic-session koa-redis --save`
+
+app.js
+
+```js
+const session = require("koa-generic-session");
+const redisStore = require("koa-redis");
+// logger
+...
+// session
+app.keys = ["WJiol#23123_"];
+app.use(
+  session({
+    // 配置 cookie
+    cookie: {
+      path: "/",
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+    // 配置 redis
+    store: redisStore({
+      // redis 的 ip 和端口
+      all: "127.0.0.1:6379", // redis 的地址
+    }),
+  })
+);
+
+//routes
+...
+```
+
+routes/user.js
+
+```js
+router.get("/session-test", async (ctx, next) => {
+  if (ctx.session.viewCount == null) {
+    ctx.session.viewCount = 0;
+  }
+  ctx.session.viewCount++;
+  ctx.body = {
+    errno: 0,
+    viewCount: ctx.session.viewCount,
+  };
+});
+```
+
+## koa 日志
+
+`pnpm add koa-morgan --save`
+
+## koa2 中间件
+
+[https://koa.bootcss.com/]
+
+分析
+
+1. 使用 app.use 用来注册中间件，先收集起来
+2. 实现 next 机制，即上一个通过 next 触发下一个
+
+# 线上环境
+
+- 服务器稳定性
+- 充分利用服务器硬件资源，以便提高性能
+- 线上日志记录
+
+## PM2
+
+PM2 的核心价值
+
+- 进程守护，系统崩溃自动重启
+- 启动多进程，充分利用 CPU 和内存
+- 自带日志记录功能
+
+### PM2 学习目录
+
+- PM2 介绍
+- PM2 进程守护
+- PM2 配置和守护
+- PM2 多进程
+- 关于服务器运维
+
+#### PM2 介绍
+
+1. 下载安装
+   `pnpm i pm2 -g`
+   `pm2 --version`
+2. 基本使用
+
+   ```json
+   // package.json
+   "scripts": {
+     "dev": "cross-env NODE_ENV=development nodemon app.js",
+     "prd": "cross-env NODE_ENV=production pm2 start app.js --name pm2-demo"
+   },
+   ```
+
+   `pnpm run prd` 会启动 pm2 进程，不会占用控制台
+   `pm2 list` 显示表格
+   ![alt text](image-7.png)
+
+3. 常用命令
+   `pm2 start ...`,`pm2 list`
+   `pm2 restart <AppName>/<id>`
+   `pm2 stop <AppName>/<id>`,`pm2 delete <AppName>/<id>`
+   `pm2 info <AppName>/<id>`
+   `pm2 log <AppName>/<id>`
+   `pm2 monit <AppName>/<id>`
+
+#### 进程守护
+
+- node app.js 和 nodemon app.js 进程崩溃则不能访问
+- PM2 遇到进程崩溃，会自动重启
+
+`http://localhost:8000/error`
+
+```js
+// ...
+// 模拟一个错误
+if (req.url === "/error") {
+  throw new Error("模拟错误");
+}
+//...
+```
+
+`pm2 restart pm2-demo` 遇到魔力的这个错误会自动重启
+
+#### PM2 配置和守护
+
+- 新建 PM2 配置文件(包括进程数量，日志文件目录等)
+- 修改 PM2 启动命令，重启
+- 访问 server,检查日志文件的内容等(日志记录是否生效)
+
+```json
+{
+  "app": {
+    "name": "pm2-demo-server",
+    "script": "app.js",
+    "watch": true,
+    "ignore_watch": ["node_modules", "logs"],
+    "error_file": "logs/err.log",
+    "out_file": "logs/out.log",
+    "log_date_format": "YYYY-MM-DD HH:mm:ss",
+    "instances": 1,
+    "exec_mode": "cluster",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "env_production": {
+      "NODE_ENV": "production"
+    }
+  }
+}
+```
+
+#### PM2 多进程
+
+为何使用多进程
+
+- 操作系统限制一个进程的内存
+- 内存： 无法充分利用机器全部内存
+- CPU： 无法利用多核 CPU 的优势
+
+多进程和 redis
+![alt text](image-8.png)
+
+- 多进程之间，内存无法共享
+  通过 redis 实现内存共享 把 session 都存入 redis
+
+#### 关于运维
+
+- 服务器运维，一般都是由专业的 OP 人员和部门来处理
+- 大公司都有自己的运维团队
+- 中小型公司推荐使用一些云服务器，如 阿里云的 node 平台

@@ -1,0 +1,18 @@
+2024-12-17 16:58:45: Error: 模拟错误
+2024-12-17 16:58:45:     at Server.<anonymous> (D:\LearnFolder\front_end-path\技术应用阶段\nodejs\pm2-demo\app.js:8:11)
+2024-12-17 16:58:45:     at Server.emit (node:events:518:28)
+2024-12-17 16:58:45:     at Server.<anonymous> (C:\Users\gerry\AppData\Local\pnpm\global\5\.pnpm\@pm2+io@6.0.1\node_modules\@pm2\io\build\main\metrics\httpMetrics.js:167:33)
+2024-12-17 16:58:45:     at parserOnIncoming (node:_http_server:1137:12)
+2024-12-17 16:58:45:     at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2024-12-17 16:58:46: Error: 模拟错误
+2024-12-17 16:58:46:     at Server.<anonymous> (D:\LearnFolder\front_end-path\技术应用阶段\nodejs\pm2-demo\app.js:8:11)
+2024-12-17 16:58:46:     at Server.emit (node:events:518:28)
+2024-12-17 16:58:46:     at Server.<anonymous> (C:\Users\gerry\AppData\Local\pnpm\global\5\.pnpm\@pm2+io@6.0.1\node_modules\@pm2\io\build\main\metrics\httpMetrics.js:167:33)
+2024-12-17 16:58:46:     at parserOnIncoming (node:_http_server:1137:12)
+2024-12-17 16:58:46:     at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
+2024-12-17 16:58:47: Error: 模拟错误
+2024-12-17 16:58:47:     at Server.<anonymous> (D:\LearnFolder\front_end-path\技术应用阶段\nodejs\pm2-demo\app.js:8:11)
+2024-12-17 16:58:47:     at Server.emit (node:events:518:28)
+2024-12-17 16:58:47:     at Server.<anonymous> (C:\Users\gerry\AppData\Local\pnpm\global\5\.pnpm\@pm2+io@6.0.1\node_modules\@pm2\io\build\main\metrics\httpMetrics.js:167:33)
+2024-12-17 16:58:47:     at parserOnIncoming (node:_http_server:1137:12)
+2024-12-17 16:58:47:     at HTTPParser.parserOnHeadersComplete (node:_http_common:119:17)
