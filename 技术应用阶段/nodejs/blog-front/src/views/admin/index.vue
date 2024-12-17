@@ -57,6 +57,11 @@ const handleAdd = async (row: BlogItem) => {
       type: "success",
     });
     fetchData();
+  } else {
+    ElMessage({
+      message: res.message,
+      type: "error",
+    });
   }
 };
 
@@ -72,6 +77,11 @@ const handleEdit = async (row: BlogItem) => {
       type: "success",
     });
     fetchData();
+  } else {
+    ElMessage({
+      message: res.message,
+      type: "error",
+    });
   }
 };
 
@@ -84,6 +94,11 @@ const handleDelete = (row: BlogItem) => {
           type: "success",
         });
         fetchData();
+      } else {
+        ElMessage({
+          message: res.message,
+          type: "error",
+        });
       }
     });
 };

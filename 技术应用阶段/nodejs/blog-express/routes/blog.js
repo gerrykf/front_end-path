@@ -23,6 +23,9 @@ router.get("/list", (req, res, next) => {
     }
   }
 
+  // 强制查询自己的博客
+  author = req.session.username;
+
   const result = getList(author, keyword);
   return result.then((listData) => {
     res.json(new SuccessModel(listData));

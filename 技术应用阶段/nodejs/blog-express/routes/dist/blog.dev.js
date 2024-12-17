@@ -28,8 +28,10 @@ router.get("/list", function (req, res, next) {
       // 未登录
       return res.json(new ErrorModel("尚未登录"));
     }
-  }
+  } // 强制查询自己的博客
 
+
+  author = req.session.username;
   var result = getList(author, keyword);
   return result.then(function (listData) {
     res.json(new SuccessModel(listData));

@@ -28,6 +28,8 @@ const login = async () => {
       type: "success",
     });
     router.push("/");
+  } else {
+    ElMessage.error(res.message);
   }
 };
 </script>
