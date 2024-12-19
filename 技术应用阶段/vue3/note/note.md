@@ -9,6 +9,13 @@
   - [v-model](#v-model)
   - [v-for \& v-if](#v-for--v-if)
     - [key](#key)
+  - [组件中的变化](#组件中的变化)
+  - [reactivity api](#reactivity-api)
+    - [获取数据响应式](#获取数据响应式)
+    - [监听数据变化](#监听数据变化)
+    - [判断](#判断)
+    - [转换](#转换)
+    - [降低心智负担](#降低心智负担)
 
 # Vue3
 
@@ -373,3 +380,23 @@ vue3中允许只在循环遍历的根节点上写 **:key**
 
  vue2中在显示手机号时输入的值 切换到邮箱时 值仍然保留着 需要给分支标记一个自定义key值
  vue3取消了这种做法更新时自动做了标记
+
+## 组件中的变化
+
+更新了teleport来改变元素结构
+
+更新了defineAsyncComponent
+
+示例[D:\LearnFolder\front_end-path\技术应用阶段\vue3\深入\组件中的变化\demo\src\utils\index.ts]
+
+## reactivity api
+
+### 获取数据响应式
+
+### 监听数据变化
+
+### 判断
+
+### 转换
+
+### 降低心智负担
