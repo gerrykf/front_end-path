@@ -22,6 +22,9 @@
     - [判断](#判断)
     - [转换](#转换)
     - [降低心智负担](#降低心智负担)
+  - [compisition API](#compisition-api)
+    - [setup](#setup)
+      - [面试题 composition api 相比于 option api 有哪些优势？](#面试题-composition-api-相比于-option-api-有哪些优势)
 
 # Vue3
 
@@ -399,12 +402,12 @@ vue3中允许只在循环遍历的根节点上写 **:key**
 
 ### 获取数据响应式
 
-| API |传入|返回|备注|
-|----|----|----|----|
-|reactive|plain-object|对象代理|深度代理对象中的成员|
-|readonly|plain-object or proxy|对象代理|只能读取代理对象中的成员，不可修改|
-|ref|any|{value...}|对value的访问是响应式的，如果给value的值是一个对象，则会通过reactive函数进行代理，如果已经是代理，则直接使用代理|
-|computed|function|{value...}|当读取value值时，会根据情况决定是否要运行函数|
+| API      | 传入                  | 返回       | 备注                                                                                                             |
+| -------- | --------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------- |
+| reactive | plain-object          | 对象代理   | 深度代理对象中的成员                                                                                             |
+| readonly | plain-object or proxy | 对象代理   | 只能读取代理对象中的成员，不可修改                                                                               |
+| ref      | any                   | {value...} | 对value的访问是响应式的，如果给value的值是一个对象，则会通过reactive函数进行代理，如果已经是代理，则直接使用代理 |
+| computed | function              | {value...} | 当读取value值时，会根据情况决定是否要运行函数                                                                    |
 
 应用场景：
 
@@ -716,12 +719,12 @@ console.log("end");
 
 ### 判断
 
-|API|含义|
-|----|----|
-|isProxy|判断某个数据是否由 reactive 或readonly创建的|
-|isReactive|判断某个数据是否是通过 reactive 创建的|
-|isReadonly|判断某个数据是否是通过 readonly 创建的|
-|isRef | 判断某个数据是否是一个 ref 对象|
+| API        | 含义                                         |
+| ---------- | -------------------------------------------- |
+| isProxy    | 判断某个数据是否由 reactive 或readonly创建的 |
+| isReactive | 判断某个数据是否是通过 reactive 创建的       |
+| isReadonly | 判断某个数据是否是通过 readonly 创建的       |
+| isRef      | 判断某个数据是否是一个 ref 对象              |
 
 ### 转换
 
@@ -837,3 +840,66 @@ setup(){
   }
 }
 ```
+
+## compisition API
+
+不同于reactivity api,composition api 提供的函数很多是与组件深度绑定的
+
+### setup
+
+```js
+export default {
+  setup(props,context){
+    // 该函数在属性被赋值后立即执行，早于所有声明周期钩子函数
+    // props 是一个对象，包含了所有的组件属性
+    // context 是一个对象，提供了组件所需上下文信息
+  }
+}
+
+```
+
+context对象的成员：
+
+| 成员  | 类型 | 说明                |
+| ----- | ---- | ------------------- |
+| attrs | 对象 | 同Vue2的this.$attrs |
+| slots | 对象 | 同Vue2的this.$slots |
+| emit  | 方法 | 同Vue2的this.$emit  |
+
+- 生命周期函数
+| vue2 option api | vue3 option api    | vue3 compisition api           |
+| --------------- | ------------------ | ------------------------------ |
+| beforeCreate    | beforeCreate       | 不再需要 代码可直接置于setup中 |
+| created         | created            | 不再需要 代码可直接置于setup中 |
+| beforeMount     | beforeMount        | onBeforeMount                  |
+| mounted         | mounted            | onMounted                      |
+| beforeUpdate    | beforeUpdate       | onBeforeUpdate                 |
+| updated         | updated            | onUpdated                      |
+| beforeDestory   | 改 beforeUnmount   | onBeforeUnMount                |
+| destoryed       | 改 unmounted       | onUnmounted                    |
+| errorCaptured   | errorCaptured      | onErrorCaptured                |
+| -               | 新 renderTracked   | onRenderTracked                |
+| -               | 新 renderTriggered | onRenderTriggered              |
+
+新增钩子函数说明：
+
+| 钩子函数        | 参数          | 执行时机                       |
+| --------------- | ------------- | ------------------------------ |
+| renderTracked   | DebuggerEvent | 渲染vdom收集到的每一次依赖时   |
+| renderTriggered | DebuggerEvent | 某个依赖变化导致组件重新渲染时 |
+
+DebuggerEvent:
+
+- target:跟踪或触发渲染的对象
+- key:跟踪或触发渲染的属性
+- type:跟踪或触发渲染的方式
+
+#### 面试题 composition api 相比于 option api 有哪些优势？
+
+> 两个方面：
+>
+> 1. 为了更好的逻辑复用和代码组织
+> 2. 更好的类型推导
+有了composition api，配合reactivity api，可以在组件内部进行更加细粒度的控制，使得组件中不同的功能能高聚合，提升了代码的可维护性。对于不同组件的相同功能，也能更好的复用。
+相比于option api,composition api中没有了指向奇怪的this,所有的api变得更加函数式，这有利于和类型推断系统 比如TS深度配合。
+

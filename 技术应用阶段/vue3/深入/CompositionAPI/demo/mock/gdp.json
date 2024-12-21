@@ -1,0 +1,42 @@
+[
+  {
+    "country": "China",
+    "gdp": 14.34
+  },
+  {
+    "country": "USA",
+    "gdp": 21.43
+  },
+  {
+    "country": "Japan",
+    "gdp": 5.08
+  },
+  {
+    "country": "Germany",
+    "gdp": 4.42
+  },
+  {
+    "country": "India",
+    "gdp": 2.87
+  },
+  {
+    "country": "UK",
+    "gdp": 2.83
+  },
+  {
+    "country": "France",
+    "gdp": 2.78
+  },
+  {
+    "country": "Italy",
+    "gdp": 2.07
+  },
+  {
+    "country": "Brazil",
+    "gdp": 1.87
+  },
+  {
+    "country": "Canada",
+    "gdp": 1.71
+  }
+]
