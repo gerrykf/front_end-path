@@ -1,11 +1,13 @@
-import { reactive, ref, watchEffect, readonly } from "vue";
-
+import { reactive, toRefs, isProxy, isRef } from "vue";
 const state = reactive({
-  a: 0,
-  b: 1,
+  foo: 1,
+  bar: 2,
 });
 
-window.state = state;
+const stateAsRefs = toRefs(state);
 
-const imState = readonly(state);
-window.imState = imState;
+console.log(stateAsRefs.foo.value); // 1
+console.log(stateAsRefs.bar.value); // 2
+
+console.log(isProxy(stateAsRefs.foo)); // false
+console.log(isRef(stateAsRefs.foo)); // false
