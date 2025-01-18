@@ -67,6 +67,7 @@ useEffct 包含以下知识点:
 
 本质是自定义函数引用了 hook 去拆分比较大的业务逻辑
 类似于 vue3 的 compostion api
+自定义 Hook 的命名规则是 use 开头 + 驼峰命名
 
 ```js
 function useCount() {
