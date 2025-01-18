@@ -1,0 +1,239 @@
+[
+  {
+    "article_ids": [
+      "301818",
+      "298932"
+    ],
+    "article_likes_ids": [],
+    "author_likes_ids": [],
+    "author_name": "风落几番",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/vue.png",
+    "explain": "蚂蚁金服测试专家，带领团队从零建立多个大型项目安全测试，针对Web安全测试搭建了基于开源工具的安全测试架构，独立开发基于WebDriver的自动化测试平台，著有《LoadRunner性能测试巧匠训练营》。",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "6433657",
+    "integral_count": "",
+    "label_ids": [],
+    "professional": "全栈工程师",
+    "status": "normal",
+    "thumbs_up_article_ids": []
+  },
+  {
+    "article_ids": [
+      "298045",
+      "286282"
+    ],
+    "article_likes_ids": [],
+    "author_likes_ids": [],
+    "author_name": "7七月",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/react.png",
+    "explain": "十年研发及团队管理经验，对程序员面临的各种问题深有体会；精通Python、Java、Node.js、JavaScript等语言，对Web的基础研发、高并发处理与分布式有非常深入的理解。课程讲解深入浅出，极为擅长培养学生的编程思维。",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "4294850",
+    "integral_count": "",
+    "label_ids": [],
+    "professional": "全栈工程师",
+    "status": "normal",
+    "thumbs_up_article_ids": []
+  },
+  {
+    "article_ids": [
+      "302042",
+      "301911"
+    ],
+    "article_likes_ids": [
+      {
+        "$oid": "655d746a21821b22193193f6"
+      },
+      {
+        "$oid": "655d746a21821b22193193f3"
+      },
+      {
+        "$oid": "655d746a21821b22193193f7"
+      },
+      {
+        "$oid": "655d746a21821b2219319401"
+      },
+      {
+        "$oid": "655d746a21821b22193193fe"
+      },
+      {
+        "$oid": "655d746a21821b22193193f5"
+      },
+      {
+        "$oid": "66b320cd865cf10f504a478e"
+      }
+    ],
+    "author_likes_ids": [
+      "8010388",
+      "108955"
+    ],
+    "author_name": "Java架构师讲师团",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/vue.png",
+    "explain": "架构师成长沟通群878622640，欢迎加入~",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "8010388",
+    "integral_count": "",
+    "label_ids": [
+      {
+        "$oid": "655d746ba09a9b1c28cbd5fd"
+      },
+      {
+        "$oid": "655d746ba09a9b1c28cbd5fe"
+      },
+      {
+        "$oid": "655d746ba09a9b1c28cbd5ff"
+      },
+      {
+        "$oid": "655d746ba09a9b1c28cbd600"
+      },
+      {
+        "$oid": "655d746ba09a9b1c28cbd601"
+      },
+      {
+        "$oid": "655d746ba09a9b1c28cbd602"
+      }
+    ],
+    "loginName": "duyiedu",
+    "password": "duyiedu",
+    "phone": "13552752517",
+    "professional": "架构师",
+    "status": "normal",
+    "thumbs_up_article_ids": [
+      {
+        "$oid": "655d746a21821b22193193f9"
+      },
+      {
+        "$oid": "655d746a21821b22193193f1"
+      },
+      {
+        "$oid": "655d746a21821b22193193f6"
+      }
+    ]
+  },
+  {
+    "article_ids": [
+      "289159",
+      "26624"
+    ],
+    "article_likes_ids": [],
+    "author_likes_ids": [],
+    "author_name": "liuyubobobo",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/js.png",
+    "explain": "创业者，全栈工程师，持续学习者。对技术开发，产品设计、前后端，ios，html5，智能算法等领域均有接触；拥有多款独立App作品；对一切可编程的东西有浓厚兴趣，对游戏编程格外感兴趣。相信编程改变一切。",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "108955",
+    "integral_count": "",
+    "label_ids": [],
+    "professional": "全栈工程师",
+    "status": "normal",
+    "thumbs_up_article_ids": []
+  },
+  {
+    "article_ids": [
+      "295301",
+      "286567"
+    ],
+    "article_likes_ids": [],
+    "author_likes_ids": [],
+    "author_name": "李超",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/webpack.png",
+    "explain": "10多年的软件开发经历，8年多的音视频直播行业相关经验，6年多的团队管理经验，丰富的linux开发经验，对Linux内核做过深入分析。参加并设计了多个高负载，大并发服务器架构。",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "4873493",
+    "integral_count": "",
+    "label_ids": [],
+    "professional": "全栈工程师",
+    "status": "normal",
+    "thumbs_up_article_ids": []
+  },
+  {
+    "article_ids": [
+      "294509",
+      "293012"
+    ],
+    "article_likes_ids": [],
+    "author_likes_ids": [],
+    "author_name": "快乐动起来呀",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/ts.png",
+    "explain": "7年工作经验的资深前端工程师，主要从事Web视频领域的底层开发。先后在360、去哪儿网、某知名视频公司工作。",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "5027812",
+    "integral_count": "",
+    "label_ids": [],
+    "professional": "Web前端工程师",
+    "status": "normal",
+    "thumbs_up_article_ids": []
+  },
+  {
+    "article_ids": [
+      "292698",
+      "292504"
+    ],
+    "article_likes_ids": [],
+    "author_likes_ids": [],
+    "author_name": "大壮老师",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/vue.png",
+    "explain": "目前任职于某大型互联网公司人工智能中心。Python开发工程师，主要负责汽车简历数据抓取、商业推广平台数据抓取及接口开发、竞品信息数据抓取等工作。 开发语言：python、autoit。项目中主要使用工具requests 多线程抓取网页系统数据，使用autoit抓取软件系统数据，使用appium抓取app系统数据等。使用scrapy进行大数据量信息抓取。",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "6685330",
+    "integral_count": "",
+    "label_ids": [],
+    "professional": "Python工程师",
+    "status": "normal",
+    "thumbs_up_article_ids": []
+  },
+  {
+    "article_ids": [
+      "300475",
+      "293310"
+    ],
+    "article_likes_ids": [],
+    "author_likes_ids": [],
+    "author_name": "双越",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/nodejs.png",
+    "explain": "资深前端工程师，PMP，项目技术负责人，现就职于BAT一线互联网公司。他的博客总流量过百万，如《深入理解JS原型和闭包》《深入理解JS异步》等。在慕课网已推出《前端javascript面试技巧》《nodejs 从零开发博客项目 web server》等教程。",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "4427201",
+    "integral_count": "",
+    "label_ids": [],
+    "professional": "Web前端工程师",
+    "status": "normal",
+    "thumbs_up_article_ids": []
+  },
+  {
+    "article_ids": [
+      "291507",
+      "283364"
+    ],
+    "article_likes_ids": [],
+    "author_likes_ids": [],
+    "author_name": "bobby",
+    "avatar": "https://duyi-static.oss-cn-beijing.aliyuncs.com/uniapp/nodejs.png",
+    "explain": "python全栈工程师，五年工作经验，喜欢钻研python技术，对爬虫、web开发以及机器学习有浓厚的兴趣，关注前沿技术以及发展趋势。",
+    "fans_count": 0,
+    "follow_count": 0,
+    "gender": "男",
+    "id": "2255006",
+    "integral_count": "",
+    "label_ids": [],
+    "professional": "全栈工程师",
+    "status": "normal",
+    "thumbs_up_article_ids": []
+  }
+]

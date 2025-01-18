@@ -1,0 +1,1 @@
+{"version":3,"file":"follow.js","sources":["pages/follow/follow.vue?type=page"],"sourcesContent":["import MiniProgramPage from '/Users/gerry/LearnSpace/uniapp-project/pages/follow/follow.vue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;AACA,GAAG,WAAW,eAAe;"}
