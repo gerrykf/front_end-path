@@ -62,3 +62,17 @@ useEffct 包含以下知识点:
     console.log("useEffect");
   }, []);
   ```
+
+## 自定义 Hook
+
+本质是自定义函数引用了 hook 去拆分比较大的业务逻辑
+
+```js
+function useCount() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    console.log("useEffect");
+  }, [count]);
+  return [count, setCount];
+}
+```
