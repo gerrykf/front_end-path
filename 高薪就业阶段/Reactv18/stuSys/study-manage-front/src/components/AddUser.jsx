@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addStu } from "../store/stuSlice";
 
 function AddUser() {
   const [stu, setStu] = useState({
@@ -8,6 +10,7 @@ function AddUser() {
     sex: 0,
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleUpdateInfo = (newInfo, key) => {
     console.log(newInfo, key);
@@ -20,6 +23,14 @@ function AddUser() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("提交表单");
+
+    if (!stu.name || !stu.age) {
+      alert("请填写完整信息");
+      return;
+    }
+
+    dispatch(addStu(stu));
+
     navigate("/", {
       state: {
         type: "success",

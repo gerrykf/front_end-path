@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { getStuList } from "../api/stu";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import Alert from "./Alert";
+import { useSelector, useDispatch } from "react-redux";
+import { getStuListAsync } from "../store/stuSlice";
 
 function Home() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [stuList, setStuList] = useState([]);
+  const dispatch = useDispatch();
+
+  const { stuList } = useSelector((state) => state.stu);
   const [search, setSearch] = useState("");
   const [searchList, setSearchList] = useState([]);
   const [alert, setAlert] = useState({ type: "", message: "" });
 
   useEffect(() => {
-    getStuList().then((res) => {
-      setStuList(res.data);
-    });
-  }, []);
+    dispatch(getStuListAsync());
+  }, [stuList.length, dispatch]);
 
   useEffect(() => {
     console.log("location-state", location.state);
@@ -29,9 +30,9 @@ function Home() {
     setSearchList(list);
   };
 
-  const list = searchList.length ? searchList : stuList;
+  const todoList = searchList.length ? searchList : stuList;
 
-  const trs = list.map((item) => (
+  const trs = todoList.map((item) => (
     <tr key={item.id}>
       <td>{item.id}</td>
       <td>{item.name}</td>
