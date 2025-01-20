@@ -1,0 +1,15 @@
+.navigation {
+  line-height: 50px;
+  margin: 0 10px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.navigation:hover,
+.navigation.active {
+  text-decoration: none;
+}
+
+.navigation.active {
+  color: #337ab7;
+}

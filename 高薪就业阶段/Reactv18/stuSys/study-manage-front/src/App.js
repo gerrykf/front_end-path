@@ -1,56 +1,31 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, NavLink } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import AddUser from "./components/AddUser";
+import Detail from "./components/Detail";
+import "./App.css";
 
 function App() {
   return (
     <div id="app" className="container">
-      <nav className="navbar navbar-inverse navbar-fixed-top">
-        <div className="container">
-          <div className="navbar-header">
-            <button
-              type="button"
-              className="navbar-toggle collapsed"
-              data-toggle="collapse"
-              data-target="#navbar"
-              aria-expanded="false"
-              aria-controls="navbar"
-            >
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">
-              Project name
-            </a>
-          </div>
-          <div id="navbar" className="collapse navbar-collapse">
-            <ul className="nav navbar-nav">
-              <li className="active">
-                <a href="#">主页</a>
-              </li>
-              <li>
-                <a href="#">关于我们</a>
-              </li>
-            </ul>
-            <ul className="nav navbar-nav navbar-right">
-              <li>
-                <a href="#">添加用户</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <ul className="nav" style={{ marginTop: 20, background: "lightblue" }}>
+        <NavLink to="/home" className="navigation">
+          主页
+        </NavLink>
+        <NavLink to="/about" className="navigation">
+          关于我们
+        </NavLink>
+      </ul>
 
       {/* 匹配的路由显示 */}
 
       <div className="container" style={{ marginTop: 50 }}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="addUser" element={<AddUser />} />
+          <Route path="detail/:id" element={<Detail />} />
+          <Route path="/" element={<Navigate to="/home" />} />
         </Routes>
       </div>
     </div>

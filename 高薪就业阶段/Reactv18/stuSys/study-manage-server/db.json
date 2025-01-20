@@ -3,27 +3,32 @@
     {
       "id": 1,
       "name": "张三",
-      "age": 18
+      "age": 18,
+      "sex": 1
     },
     {
       "id": 2,
       "name": "李四",
-      "age": 19
+      "age": 19,
+      "sex": 0
     },
     {
       "id": 3,
       "name": "王五",
-      "age": 20
+      "age": 20,
+      "sex": 1
     },
     {
       "id": 4,
       "name": "赵六",
-      "age": 21
+      "age": 21,
+      "sex": 0
     },
     {
       "id": 5,
       "name": "孙七",
-      "age": 22
+      "age": 22,
+      "sex": 1
     }
   ],
   "classes": [
