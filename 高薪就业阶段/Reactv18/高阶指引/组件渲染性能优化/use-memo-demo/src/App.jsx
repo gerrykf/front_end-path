@@ -30,7 +30,7 @@ function App() {
   const newCount =useMemo(()=>{
     console.log('getCount..');
     return counter + 100;
-  },[]); 
+  },[counter]); 
 
 
   return (
