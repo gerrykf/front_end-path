@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * 使用fiber架构实现一个简单的任务调度(Scheduler)
+         * 使用浏览器的requestIdleCallback实现  
+         * 
+         * 任务队列中有10个任务，每个任务执行时间为10ms
+         * 
+         */
+
+        function delay(time){
+            const start = Date.now();
+            while(Date.now() - start < time){}
+        }
+
+        const task  = [];// 任务队列
+
+
+        for(let i = 1; i <= 10; i++) {
+            task.push(()=>{
+                delay(10);
+                console.log(`任务${i}`)
+            })
+        }
+
+        function workLoop(idleLine){
+            console.log('当前空闲时间：', idleLine.timeRemaining());
+
+            // 当前空闲时间大于0并且任务队列不为空
+            while(idleLine.timeRemaining()>0 && task.length >0){
+                const currentTask = task.shift();
+                currentTask();
+            }
+
+            // 退出循环后，如果任务队列还有任务，继续调用requestIdleCallback
+            if(task.length > 0){
+                // 下一帧继续执行
+                window.requestIdleCallback(workLoop);
+            }
+        }
+
+        window.requestIdleCallback(workLoop);
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/follow/follow",
+			"style": {
+				"navigationBarTitleText": "关注",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/self/self",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/search/search",
+			"style": {
+				"navigationBarTitleText": "搜索"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"color": "#666",
+		"selectedColor": "#f25037",
+		"backgroundColor": "#fff",
+		"list": [ // 显示页面信息
+			{
+				"pagePath": "pages/index/index", // 页面路径
+				"iconPath": "static/img/home.png", // 默认图片
+				"selectedIconPath": "static/img/home-active.png", // 选中图片
+				"text": "首页" // 文字描述信息
+			},
+			{
+				"pagePath": "pages/follow/follow",
+				"iconPath": "static/img/follow.png",
+				"selectedIconPath": "static/img/follow-active.png",
+				"text": "关注"
+			},
+			{
+				"pagePath": "pages/self/self",
+				"iconPath": "static/img/my.png",
+				"selectedIconPath": "static/img/my-active.png",
+				"text": "我的"
+			}
+		]
+	}
+}

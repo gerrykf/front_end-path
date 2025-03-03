@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .user-card {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 10px;
+      }
+
+      .user-card img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <user-card :name="name" :email="email" :avatar-url="avatarUrl" />
+    </div>
+
+    <!-- 书写模板 -->
+    <template id="user-card-template">
+      <div class="user-card">
+        <img :src="avatar" alt="User avatar" />
+        <div class="user-info">
+          <h2>{{name}}</h2>
+          <p>{{email}}</p>
+        </div>
+      </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.global.prod.js"></script>
+    <script>
+      const { createApp } = Vue;
+
+      const UserCard = {
+        name: "UserCard",
+        props: {
+          name: String,
+          email: String,
+          avatarUrl: String,
+        },
+        template: "#user-card-template",
+      };
+
+      createApp({
+        components: {
+          UserCard,
+        },
+        data() {
+          return {
+            name: "John Doe",
+            email: "test@gmail.com",
+            avatarUrl: "https://via.placeholder.com/150",
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
