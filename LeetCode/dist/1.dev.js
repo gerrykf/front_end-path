@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * 给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
  *
@@ -25,21 +27,26 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function (nums, target) {
-  const map = new Map(); // 创建一个map来存储数组的值和索引
-  for (let i = 0; i < nums.length; i++) {
-    const diff = target - nums[i]; // 计算差值
+var twoSum = function twoSum(nums, target) {
+  var map = new Map(); // 创建一个map来存储数组的值和索引
+
+  for (var i = 0; i < nums.length; i++) {
+    var diff = target - nums[i]; // 计算差值
+
     if (map.has(diff)) {
       // 如果map中存在差值，返回差值的索引和当前索引
       return [map.get(diff), i];
     }
+
     map.set(nums[i], i); // 如果map中不存在差值，将当前值和索引存入map
   }
+
   return [];
 };
 
-const res = twoSum([2, 7, 11, 15], 9); // [0, 1]
-const res2 = twoSum([6, 14, 4, 12, 20], 18);
+var res = twoSum([2, 7, 11, 15], 9); // [0, 1]
+
+var res2 = twoSum([6, 14, 4, 12, 20], 18);
 console.log(res);
 console.log(res2);
 
@@ -53,7 +60,8 @@ function twoSum2(nums, target) {
   return [];
 }
 
-const res3 = twoSum2([2, 7, 11, 15], 9); // [0, 1]
-const res4 = twoSum2([6, 14, 4, 12, 20], 18);
+var res3 = twoSum2([2, 7, 11, 15], 9); // [0, 1]
+
+var res4 = twoSum2([6, 14, 4, 12, 20], 18);
 console.log(res3);
 console.log(res4);
