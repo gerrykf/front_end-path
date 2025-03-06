@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "ES2015",
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["node", "vitest/globals", "@vue/test-utils"]
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "src/**/*.vue"],
+  "exclude": ["node_modules", "dist", "tests", "src/main.ts"]
+}
