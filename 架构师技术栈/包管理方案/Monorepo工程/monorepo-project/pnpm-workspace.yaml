@@ -1,3 +1,0 @@
-packages:
-  - "packages/*"   # 业务逻辑的公共包（utils、组件库等）
-  - "apps/*"       # 各个独立应用（Vue、React、Node）
