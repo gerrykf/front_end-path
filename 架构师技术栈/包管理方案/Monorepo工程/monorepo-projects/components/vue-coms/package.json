@@ -3,9 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "module": "./dist/vuecoms-lib.es.ts",
+  "types": "./dist/types/lib.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/vuecoms-lib.es.ts",
+      "types": "./dist/types/lib.d.ts"
+    },
+    "./assets/style.css": "./dist/assets/vue-coms.css",
+    "./assets/font.scss": "./dist/assets/fonts/font.scss"
+  },
   "scripts": {
     "dev": "vite",
     "test:unit": "vitest",
+    "lib": "vite build && pnpm run postbuild",
+    "postbuild": "node postbuild.js",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
