@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BFC</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            /* 发生了外边距重叠 */
+            margin: 30px;
+        }
+
+        .one {
+            background-color: red;
+        }
+
+        .two {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="one"></div>
+    <div class="two"></div>
+</body>
+
+</html>
