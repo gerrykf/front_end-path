@@ -1,9 +1,9 @@
 /* 基础设置相关逻辑 */
 
 const querystring = require("querystring");
-const { handleBlogRouter, handleUserRouter } = require("./src/router");
+const { handleBlogRouter, handleUserRouter } = require("./src/router/index.js");
 const { get, set } = require("./src/db/redis.js");
-const { access } = require("./src/utils/log");
+const { access } = require("./src/utils/log.js");
 
 /**
  * 获取 cookie 的过期时间
