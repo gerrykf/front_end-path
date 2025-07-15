@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/index.ts"],
+  "sourcesContent": ["export function fn(a, b) {\r\n  return a + b;\r\n}\r\n"],
+  "mappings": ";AAAO,SAAS,GAAG,GAAG,GAAG;AACvB,SAAO,IAAI;AACb;",
+  "names": []
+}
