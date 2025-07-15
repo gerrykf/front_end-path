@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      //   import {
+      //     ref,
+      //     effect,
+      //   } from "../../../node_modules/vue/dist/vue.esm-browser.prod.js";
+      import { ref, effect } from "../dist/reactivity.esm.js";
+
+      const count = ref(0);
+
+      effect(() => {
+        console.log("effect1 count.value ==>", count.value);
+      });
+
+      /**
+       * 如果存在多个 effect 时，Vue 应该将每个 effect 都执行一次。
+       * 目前简单的响应式已经实现
+       * 后面需要使用链表来存储多个 effect
+       */
+      //   effect(() => {
+      //     console.log("effect2 count.value ==>", count.value);
+      //   });
+
+      setTimeout(() => {
+        count.value++;
+      }, 1000);
+    </script>
+  </body>
+</html>

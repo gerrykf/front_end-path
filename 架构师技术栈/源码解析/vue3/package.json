@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/dev.js reactivity --format iife"
+    "dev": "node scripts/dev.js reactivity --format esm"
   },
   "keywords": [],
   "author": "",

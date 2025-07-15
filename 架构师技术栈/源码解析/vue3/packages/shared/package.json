@@ -1,16 +1,16 @@
 {
-  "name": "vue",
+  "name": "@vue/shared",
   "version": "1.0.0",
-  "description": "vue核心库",
-  "main": "dist/vue.cjs.js",
-  "module": "dist/vue.esm.js",
+  "description": "工具函数",
+  "main": "dist/shared.cjs.js",
+  "module": "dist/shared.esm.js",
   "files": [
     "index.js",
     "dist"
   ],
   "sideEffects": false,
   "buildOptions": {
-    "name": "Vue",
+    "name": "VueShared",
     "formats": [
       "esm-bundler",
       "esm-browser",

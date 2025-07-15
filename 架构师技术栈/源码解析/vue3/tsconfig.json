@@ -11,6 +11,8 @@
       "DOM"
     ], // 指定要使用的库文件
     "paths": {
+      // 希望导入的包名映射到实际的路径
+      // @vue/* 映射到 packages/*/src *-表示reactivity|shared等
       "@vue/*": [
         "packages/*/src"
       ]
