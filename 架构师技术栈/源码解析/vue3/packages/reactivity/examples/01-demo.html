@@ -24,13 +24,23 @@
        * 目前简单的响应式已经实现
        * 后面需要使用链表来存储多个 effect
        */
-      //   effect(() => {
-      //     console.log("effect2 count.value ==>", count.value);
-      //   });
+      effect(() => {
+        console.log("effect2 count.value ==>", count.value);
+      });
 
       setTimeout(() => {
         count.value++;
       }, 1000);
+
+      /**
+       * 将链表运用到响应式系统中
+       * 
+       * const count = ref(0); // 这里创建一个Ref对象实例
+       *
+       * effect((){ console.log(count.value); }); // 这里 effect 函数中如果使用了响应式变量就会进入Ref对象的 get函数中，这里面做的事就是：创建链表关系，将副作用函数存放到链表中形成依赖收集
+       *
+       * setTimeout(()=>{count.value++;},1000); //1秒后进入Ref对象的set函数中,如果Ref对象的get函数收集过依赖，那现在的Ref对象实例的链表中就有副作用函数，这里执行副作用函数就形成触发依赖更新
+       */
     </script>
   </body>
 </html>

@@ -6,6 +6,32 @@ function effect(fn) {
   activeSub = void 0;
 }
 
+// packages/reactivity/src/system.ts
+function link(dep, sub) {
+  const newLink = {
+    sub,
+    nextSub: void 0,
+    prevSub: void 0
+  };
+  if (dep.subsTail) {
+    dep.subsTail.nextSub = newLink;
+    newLink.prevSub = dep.subsTail;
+    dep.subsTail = newLink;
+  } else {
+    dep.subs = newLink;
+    dep.subsTail = newLink;
+  }
+}
+function propagate(subs) {
+  let link2 = subs;
+  let queuedEffect = [];
+  while (link2) {
+    queuedEffect.push(link2.sub);
+    link2 = link2.nextSub;
+  }
+  queuedEffect.forEach((effect2) => effect2());
+}
+
 // packages/reactivity/src/ref.ts
 var RefImpl = class {
   /**
@@ -17,21 +43,25 @@ var RefImpl = class {
    */
   ["__v_isRef" /* IS_REF */] = true;
   /**
-   * 保存和 effect 之间的关联关系
+   * 订阅者链表的头节点,理解为head
    */
   subs;
+  /**
+   * 订阅者链表的尾节点，理解为tail
+   */
+  subsTail;
   constructor(value) {
     this._value = value;
   }
   get value() {
     if (activeSub) {
-      this.subs = activeSub;
+      trackRef(this);
     }
     return this._value;
   }
   set value(newValue) {
     this._value = newValue;
-    this.subs?.();
+    triggerRef(this);
   }
 };
 function ref(value) {
@@ -40,10 +70,23 @@ function ref(value) {
 function isRef(value) {
   return !!(value && value["__v_isRef" /* IS_REF */]);
 }
+function trackRef(dep) {
+  if (activeSub) {
+    link(dep, activeSub);
+  }
+}
+function triggerRef(dep) {
+  if (dep.subs) {
+    propagate(dep.subs);
+  }
+}
 export {
+  RefImpl,
   activeSub,
   effect,
   isRef,
-  ref
+  ref,
+  trackRef,
+  triggerRef
 };
 //# sourceMappingURL=reactivity.esm.js.map
